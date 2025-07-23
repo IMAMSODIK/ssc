@@ -1,0 +1,61 @@
+daftar layanan diganti jadi model collapse
+
+web profile
+    -> whatsapp
+    -> alamat
+    -> instagram
+    -> email
+    -> nama_perusahaan
+    -> jargon_perusahaan
+    -> logo
+    -> dikunjungi
+
+banner
+    -> gambar
+    -> heading_1
+    -> heading_2
+    -> text_tombol
+    -> link_tombol
+
+layanan
+    -> judul
+    -> keterangan
+    -> dikunjungi
+
+testimoni
+    -> nama
+    -> asal (perorangan/perusahaan)
+    -> testi
+
+galeri
+    -> gambar
+    -> keterangan
+
+profile_user
+    -> user_id
+    -> gambar
+    -> instagram
+    -> facebook
+    -> email
+    -> whatsapp
+    -> detail (rich text)
+    -> dikunjungi
+
+client
+    -> gambar
+    
+aktivitas
+    -> creator
+    -> kategori
+    -> thumbnail
+    -> deskripsi
+    -> dikunjungi (integer)
+
+dashboard
+Total Kunjungan Web Profile
+Total Layanan
+Total Testimoni
+Total Galeri
+Total Lawyer
+Total Client
+Total Aktivitas
