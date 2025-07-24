@@ -9,7 +9,7 @@
                         <h4>User</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                        <button class="btn btn-success" id="tambah-data">Tambah User</button>
+                        <button class="btn btn-success" id="tambah-data">Tambah Banner</button>
                     </div>
                 </div>
             </div>
@@ -26,45 +26,26 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 10%; font-size: 18px" class="text-center">No. </th>
-                                            <th style="font-size: 18px" class="text-center">Nama</th>
-                                            <th style="width: 10%; font-size: 18px" class="text-center">Username</th>
-                                            <th style="width: 10%; font-size: 18px" class="text-center">Role</th>
-                                            <th style="width: 30%; font-size: 18px" class="text-center">Info Peserta</th>
+                                            <th style="font-size: 18px" class="text-center">Nama Layanan</th>
+                                            <th style="width: 60%; font-size: 18px" class="text-center">keterangan</th>
+                                            <th style="font-size: 18px" class="text-center">Dikunjungi</th>
                                             <th style="width: 10%; font-size: 18px" class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $index = 1; @endphp
-                                        @foreach ($users as $user)
+                                        @foreach ($layanans as $layanan)
                                             <tr>
                                                 <td style="font-size: 18px" cla ss="text-center">{{ $index++ }}</td>
-                                                <td style="font-size: 18px">{{ $user->name }}</td>
-                                                <td style="font-size: 18px">{{ $user->username }}</td>
-                                                <td style="font-size: 18px">{{ $user->role }}</td>
-                                                <td style="font-size: 18px">
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <span class="badge text-bg-success">Dibuat</span>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            : {{$user->created_at}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-1">
-                                                        <div class="col-md-3">
-                                                            <span class="badge text-bg-warning">Update</span>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            : {{$user->updated_at}}
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td style="font-size: 18px">{{ $layanan->judul }}</td>
+                                                <td style="font-size: 18px">{{ $layanan->keterangan }}</td>
+                                                <td style="font-size: 18px">{{ $layanan->visited }}</td>
                                                 <td class="text-center">
                                                     <ul class="action d-flex justify-content-center">
-                                                        <li class="edit" data-id="{{ $user->id }}"> <a
+                                                        <li class="edit" data-id="{{ $layanan->id }}"> <a
                                                                 href="#"><i class="icon-pencil-alt"
                                                                     style="font-size: 25px"></i></a></li>
-                                                        <li class="delete" data-id="{{ $user->id }}"><a
+                                                        <li class="delete" data-id="{{ $layanan->id }}"><a
                                                                 href="#"><i class="icon-trash"
                                                                     style="font-size: 25px"></i></a></li>
                                                     </ul>
@@ -86,7 +67,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Arsip</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Layanan</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
@@ -96,29 +77,18 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="nama">Nama User</label>
-                                            <input type="text" class="form-control input-air-primary" id="nama"
-                                                placeholder="Masukkan Nama User" required>
+                                            <label class="form-label" for="judul">Judul</label>
+                                            <input type="text" class="form-control input-air-primary" id="judul"
+                                                placeholder="Masukkan Judul" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="username">Username</label>
-                                            <input type="text" class="form-control input-air-primary" id="username"
-                                                placeholder="Masukkan Username" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="role">Pilih Role</label>
-                                            <select class="form-control input-air-primary" id="role">
-                                                <option value="Admin">Admin</option>
-                                                <option value="Lawyer">Lawyer</option>
-                                            </select>
+                                            <label class="form-label" for="keterangan">Keterangan</label>
+                                            <textarea class="form-control input-air-primary" id="keterangan"
+                                                placeholder="Masukkan Keterangan" required cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +109,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Edit Arsip</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Edit Layanan</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
@@ -150,29 +120,18 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="edit_nama">Nama User</label>
-                                            <input type="text" class="form-control input-air-primary" id="edit_nama"
-                                                placeholder="Masukkan Nama User" required>
+                                            <label class="form-label" for="edit_judul">Judul</label>
+                                            <input type="text" class="form-control input-air-primary" id="edit_judul"
+                                                placeholder="Masukkan Judul" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="edit_username">Username</label>
-                                            <input type="text" class="form-control input-air-primary" id="edit_username"
-                                                placeholder="Masukkan Username" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="edit_role">Pilih Role</label>
-                                            <select class="form-control input-air-primary" id="edit_role">
-                                                <option value="Admin">Admin</option>
-                                                <option value="Lawyer">Lawyer</option>
-                                            </select>
+                                            <label class="form-label" for="edit_keterangan">Keterangan</label>
+                                            <textarea class="form-control input-air-primary" id="edit_keterangan"
+                                                placeholder="Masukkan Keterangan" required cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -236,5 +195,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{ asset('own_assets/scripts/user.js') }}"></script>
+    <script src="{{ asset('own_assets/scripts/layanan.js') }}"></script>
 @endsection

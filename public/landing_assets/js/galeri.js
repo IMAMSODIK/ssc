@@ -1,5 +1,3 @@
-
-// Enhanced Mobile Menu Functionality
 document.addEventListener('DOMContentLoaded', function () {
     const menuToggle = document.getElementById('menuToggle');
     const sidebarMenu = document.getElementById('sidebarMenu');
@@ -159,126 +157,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const slider = document.querySelector('.lawyers-slider');
-    const prevBtn = document.querySelector('.slider-prev');
-    const nextBtn = document.querySelector('.slider-next');
-    const cards = document.querySelectorAll('.lawyer-card');
-    let currentIndex = 0;
-    let autoSlideInterval;
-    let cardWidth = 100; // Default to 100% for mobile
-    let cardsToShow = 1; // Default to 1 card for mobile
-
-    function updateCardWidth() {
-        // Check screen width to determine how many cards to show
-        if (window.innerWidth >= 992) {
-            cardsToShow = 3;
-            cardWidth = 100 / cardsToShow;
-        } else if (window.innerWidth >= 768) {
-            cardsToShow = 2;
-            cardWidth = 100 / cardsToShow;
-        } else {
-            cardsToShow = 1;
-            cardWidth = 100;
-        }
-
-        // Update all cards' flex basis
-        cards.forEach(card => {
-            card.style.flex = `0 0 ${cardWidth}%`;
-        });
-
-        // Show/hide navigation arrows based on screen size
-        if (cardsToShow < cards.length) {
-            prevBtn.style.display = 'block';
-            nextBtn.style.display = 'block';
-        } else {
-            prevBtn.style.display = 'none';
-            nextBtn.style.display = 'none';
-        }
-    }
-
-    // Clone first few cards and append to end for infinite loop
-    function cloneCards() {
-        const cardsToClone = Math.min(cardsToShow, cards.length);
-        const firstCards = Array.from(cards).slice(0, cardsToClone).map(card => card.cloneNode(true));
-        firstCards.forEach(card => slider.appendChild(card));
-    }
-
-    function updateSlider() {
-        slider.style.transform = `translateX(-${currentIndex * cardWidth}%)`;
-    }
-
-    function nextSlide() {
-        currentIndex++;
-        if (currentIndex > cards.length) {
-            // When we reach the cloned cards, instantly jump back to start
-            currentIndex = 0;
-            slider.style.transition = 'none';
-            updateSlider();
-            // Force reflow
-            void slider.offsetWidth;
-            slider.style.transition = 'transform 0.5s ease';
-        }
-        updateSlider();
-    }
-
-    function prevSlide() {
-        currentIndex--;
-        if (currentIndex < 0) {
-            // When we go before first card, jump to cloned cards at end
-            currentIndex = cards.length;
-            slider.style.transition = 'none';
-            updateSlider();
-            // Force reflow
-            void slider.offsetWidth;
-            slider.style.transition = 'transform 0.5s ease';
-        }
-        updateSlider();
-    }
-
-    // Auto slide every 3 seconds
-    function startAutoSlide() {
-        autoSlideInterval = setInterval(nextSlide, 3000);
-    }
-
-    function stopAutoSlide() {
-        clearInterval(autoSlideInterval);
-    }
-
-    // Event listeners
-    nextBtn.addEventListener('click', function () {
-        stopAutoSlide();
-        nextSlide();
-        startAutoSlide();
-    });
-
-    prevBtn.addEventListener('click', function () {
-        stopAutoSlide();
-        prevSlide();
-        startAutoSlide();
-    });
-
-    // Pause auto slide on hover
-    slider.addEventListener('mouseenter', stopAutoSlide);
-    slider.addEventListener('mouseleave', startAutoSlide);
-
-    // Handle window resize
-    window.addEventListener('resize', function () {
-        updateCardWidth();
-        updateSlider();
-    });
-
-    // Initialize
-    updateCardWidth();
-    cloneCards();
-    updateSlider();
-    startAutoSlide();
-});
-
 const images = document.querySelectorAll('.mansory-gallery img');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.querySelector('.lightbox-img');
-const lightboxCaption = document.querySelector(".caption");
 const closeBtn = document.querySelector('.lightbox .close');
 const prevBtn = document.querySelector('.nav.prev');
 const nextBtn = document.querySelector('.nav.next');
@@ -297,7 +178,7 @@ function showImage() {
     lightbox.style.display = 'flex';
     const currentImg = imageList[currentIndex];
     lightboxImg.src = currentImg.src;
-
+    const lightboxCaption = document.querySelector(".caption");
     const wrapper = currentImg.closest('.image-wrapper');
     const caption = wrapper?.getAttribute('data-keterangan') || '';
     lightboxCaption.textContent = caption;
@@ -334,28 +215,3 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeLightbox();
     }
 });
-
- function toggleCollapse(header) {
-    // Dapatkan elemen terkait
-    const container = header.parentElement;
-    const body = header.nextElementSibling;
-    const isOpen = body.classList.contains('open');
-    
-    // Tutup semua collapse body dalam services-grid
-    const allBodies = document.querySelectorAll('.collapse-body');
-    allBodies.forEach(el => {
-        if (el !== body) {
-            el.classList.remove('open');
-            el.style.maxHeight = null;
-        }
-    });
-    
-    // Toggle collapse yang diklik
-    if (!isOpen) {
-        body.classList.add('open');
-        body.style.maxHeight = body.scrollHeight + 'px';
-    } else {
-        body.classList.remove('open');
-        body.style.maxHeight = null;
-    }
-}

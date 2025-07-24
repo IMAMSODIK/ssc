@@ -2,30 +2,6 @@ let table = $("#basic-1").DataTable();
 let jawabIndex = 1;
 let modal = "", target = "", id_ctr = 0;
 
-function formatedDate(dateString){
-    let date = new Date(dateString);
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-
-    day = day < 10 ? '0' + day : day;
-    month = month < 10 ? '0' + month : month;
-
-    return `${day}-${month}-${year}`;
-}
-
-function generatePassword() {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < 10) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
-    }
-    return result;
-}
-
 $("#cancel-edit").on("click", function () {
     closeModal($("#edit-data-modal"));
 })
@@ -52,66 +28,97 @@ function openModal(modal) {
     $(modal).modal('show');
 }
 
+$('#gambar').on('change', function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview-logo')
+                .attr('src', e.target.result)
+                .show();
+        }
+
+        reader.readAsDataURL(file);
+    }
+});
+
+$('#edit_gambar').on('change', function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#edit_preview-logo')
+                .attr('src', e.target.result)
+                .show();
+        }
+
+        reader.readAsDataURL(file);
+    }
+});
+
 $("#tambah-data").on("click", function () {
     $("#tambah-data-modal").modal("show");
 });
 
 $('#store').click(function (e) {
+    e.preventDefault();
     $("#tambah-data-modal").modal("hide");
-    
-    let name = $("#nama").val(),
-        username = $("#username").val(),
-        role = $("#role").val();
 
-    if(!name || !username || !role){
-        modal = "#tambah-data-modal";
-        alertModal(false, "Semua Field harus diisi!");
-    }else{
-        $.ajax({
-            url: '/users/store',
-            method: 'POST',
-            data: {
-                '_token': $("meta[name='csrf-token']").attr('content'),
-                'name': name,
-                'username': username,
-                'role': role
-            },
-            success: function (response) {
-                if (response.status) {
-                    alertModal(true, "Data Berhasil disimpan");
-
-                    setTimeout(() => {
-                        location.reload();
-                    }, 2000);
-                } else {
-                    modal = "#tambah-data-modal";
-                    alertModal(false, response.message);
-                }
-            },
-            error: function (xhr) {
-                modal = "#tambah-data-modal";
-                if (xhr.status === 422) {
-                    var errors = xhr.responseJSON.errors;
-                    var errorMessage = '';
-
-                    $.each(errors, function (key, value) {
-                        errorMessage += value[0] + '';
-                    });
-
-                    alertModal(false, errorMessage);
-                } else {
-                    alertModal(false, "Terjadi kesalahan saat mengirim data");
-                }
-            }
-        })    
+    const formData = new FormData();
+    const gambar = $('#gambar')[0].files[0];
+    if (gambar) {
+        formData.append('gambar', gambar);
     }
+
+    formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+    formData.append('heading_1', $('#heading_1').val());
+    formData.append('heading_2', $('#heading_2').val());
+    formData.append('text_tombol', $('#text_tombol').val());
+    formData.append('link_tombol', $('#link_tombol').val());
+    
+    $.ajax({
+        url: '/banners/store',
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if (response.status) {
+                alertModal(true, "Data Berhasil diupdate");
+
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            } else {
+                modal = "#tambah-data-modal";
+                alertModal(false, response.message);
+            }
+        },
+        error: function (xhr) {
+            modal = "#tambah-data-modal";
+            if (xhr.status === 422) {
+                var errors = xhr.responseJSON.errors;
+                var errorMessage = '';
+
+                $.each(errors, function (key, value) {
+                    errorMessage += value[0] + '';
+                });
+
+                alertModal(false, errorMessage);
+            } else {
+                alertModal(false, "Terjadi kesalahan saat mengirim data");
+            }
+        }
+    });
 });
 
 $(document).on("click", ".edit", function () {
     let id = $(this).data('id');
 
     $.ajax({
-        url: '/users/edit',
+        url: '/banner/edit',
         method: 'GET',
         data: {
             'id': id
@@ -119,9 +126,12 @@ $(document).on("click", ".edit", function () {
         success: function (response) {
             if (response.status) {
                 $("#id").val(response.data.id);
-                $("#edit_nama").val(response.data.name);
-                $("#edit_username").val(response.data.username);
-                $("#edit_role").val(response.data.role);
+                $('#edit_heading_1').val(response.data.heading_1);
+                $('#edit_heading_2').val(response.data.heading_2);
+                $('#edit_text_tombol').val(response.data.text_tombol);
+                $('#edit_link_tombol').val(response.data.link_tombol);
+                $('#edit_preview-logo').prop('src', `../../storage/${response.data.gambar}`)
+                $('#edit_preview-logo').css('display', '')
 
                 $("#edit-data-modal").modal("show");
             } else {
@@ -147,16 +157,22 @@ $(document).on("click", ".edit", function () {
 
 $("#update").on("click", function () {
     $("#edit-data-modal").modal("hide");
-    let formData = new FormData();
 
-    formData.append("_token", $("meta[name='csrf-token']").attr('content'));
-    formData.append("id", $("#id").val());
-    formData.append("name", $("#edit_nama").val());
-    formData.append("username", $("#edit_username").val());
-    formData.append("role", $("#edit_role").val());
+    const formData = new FormData();
+    const gambar = $('#edit_gambar')[0].files[0];
+    if (gambar) {
+        formData.append('gambar', gambar);
+    }
+
+    formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+    formData.append('id', $('#id').val());
+    formData.append('heading_1', $('#edit_heading_1').val());
+    formData.append('heading_2', $('#edit_heading_2').val());
+    formData.append('text_tombol', $('#edit_text_tombol').val());
+    formData.append('link_tombol', $('#edit_link_tombol').val());
 
     $.ajax({
-        url: '/users/update',
+        url: '/banner/update',
         method: 'POST',
         processData: false,
         contentType: false,
@@ -200,7 +216,7 @@ $("#delete-confirmed").on("click", function () {
         alertModal(false, "Data belum dipilih");
     }else{
         $.ajax({
-            url: '/users/delete',
+            url: '/banner/delete',
             method: 'POST',
             data: {
                 '_token': $("meta[name='csrf-token']").attr("content"),
@@ -239,22 +255,4 @@ $(document).on("click", "#close-alert", function () {
         openModal(modal);
     }
     modal = "";
-})
-
-$("#generate-password").on("click", function(){
-    $("#password").val(generatePassword());
-});
-
-$("#copy-password").on("click", function(){
-    navigator.clipboard.writeText($("#password").val()).then(function(){
-        if($("#password").val() == ""){
-            $("#password-error").css("display", "block");
-        }else{
-            $("#password-error").css("display", "none");
-            $(this).text("Copied!");
-            $("#store").prop("disabled", false);
-        }
-    }).catch(function(error){
-        alert(error);
-    })
 })

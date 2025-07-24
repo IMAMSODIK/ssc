@@ -5,11 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIAGIAN SUDIBYO & CO | Mitra Hukum Terpercaya</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('landing_assets/logo/logo.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('landing_assets/logo/logo.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('landing_assets/logo/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('landing_assets/logo/logo.png') }}">
 
-    <link rel="stylesheet" href="{{asset('landing_assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('landing_assets/css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        .swiper-button-next, .swiper-button-prev {
+            color: #c0a066 !important;
+        }
+        .swiper-pagination-bullet {
+            background: #c0a066 !important;
+            opacity: 1 !important;
+        }
+        .swiper-pagination-bullet-active {
+            background: #303030 !important;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -17,7 +32,7 @@
     <div class="header-top">
         <div class="container header-top-container">
             <div class="logo">
-                <img src="{{asset('landing_assets/logo/logo.png')}}" alt="LawFirm Logo">
+                <img src="{{ asset('landing_assets/logo/logo.png') }}" alt="LawFirm Logo">
                 <div class="logo-text">
                     <h3>SIAGIAN SUDIBYO & CO</h3>
                     <p>Lawyer & Law Firm</p>
@@ -75,7 +90,7 @@
     <!-- Sidebar Mobile Menu -->
     <div class="sidebar-menu" id="sidebarMenu">
         <div class="logo" style="margin-bottom: 50px; margin-left: 30px">
-            <img src="{{asset('landing_assets/logo/logo.png')}}" alt="LawFirm Logo">
+            <img src="{{ asset('landing_assets/logo/logo.png') }}" alt="LawFirm Logo">
             <div class="logo-text">
                 <h3>SIAGIAN SUDIBYO & CO</h3>
                 <p>Lawyer & Law Firm</p>
@@ -240,18 +255,21 @@
             </div>
 
             <!-- Social Media & Copyright -->
-            <div class="footer-bottom" style="
+            <div class="footer-bottom"
+                style="
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 1.5rem;
         ">
-                <div class="social-links" style="
+                <div class="social-links"
+                    style="
                 display: flex;
                 gap: 1rem;
                 margin-bottom: 1rem;
             ">
-                    <a href="#" style="
+                    <a href="#"
+                        style="
                     text-decoration: none;
                     color: white;
                     background-color: rgba(255,255,255,0.1);
@@ -265,7 +283,8 @@
                 ">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" style="
+                    <a href="#"
+                        style="
                     text-decoration: none;
                     color: white;
                     background-color: rgba(255,255,255,0.1);
@@ -279,7 +298,8 @@
                 ">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="#" style="
+                    <a href="#"
+                        style="
                     text-decoration: none;
                     color: white;
                     background-color: rgba(255,255,255,0.1);
@@ -293,7 +313,8 @@
                 ">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" style="
+                    <a href="#"
+                        style="
                     text-decoration: none;
                     color: white;
                     background-color: rgba(255,255,255,0.1);
@@ -309,7 +330,8 @@
                     </a>
                 </div>
 
-                <p style="
+                <p
+                    style="
                 color: rgba(255,255,255,0.7);
                 font-size: 0.8rem;
                 margin-bottom: 0.8rem;
@@ -326,8 +348,8 @@
 
     <!-- Hero Slider -->
     <div class="hero-slider" id="home">
-        <!-- Slide 1 -->
-        <div class="slide active" style="background-image: url('{{asset('landing_assets/images/ctr old/image.jpeg')}}');">
+        <div class="slide active"
+            style="background-image: url('{{ asset('landing_assets/images/banner/image.jpeg') }}');">
             <div class="container">
                 <div class="slide-content">
                     <h2>Solusi Hukum Profesional untuk Bisnis Anda</h2>
@@ -337,29 +359,17 @@
                 </div>
             </div>
         </div>
-
-        <!-- Slide 2 -->
-        <div class="slide" style="background-image: url('{{asset('landing_assets/images/ctr old/image2.jpeg')}}');">
-            <div class="container">
-                <div class="slide-content">
-                    <h2>Tim Pengacara Berpengalaman</h2>
-                    <p>Dengan lebih dari 15 tahun pengalaman, kami siap mendampingi Anda dalam berbagai masalah hukum.
-                    </p>
-                    <a href="#" class="btn">Lihat Profil Pengacara</a>
+        @foreach ($banners as $banner)
+            <div class="slide" style="background-image: url('{{ asset('storage') . '/' . $banner->gambar }}');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h2>{{ $banner->heading_1 }}</h2>
+                        <p>{{ $banner->heading_2 }}</p>
+                        <a href="{{ $banner->link_tombol }}" class="btn">{{ $banner->text_tombol }}</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="slide" style="background-image: url('{{asset('landing_assets/images/ctr old/image3.jpeg')}}');">
-            <div class="container">
-                <div class="slide-content">
-                    <h2>Konsultasi Hukum Gratis</h2>
-                    <p>Manfaatkan konsultasi hukum pertama gratis dengan pengacara spesialis kami.</p>
-                    <a href="#" class="btn">Jadwalkan Konsultasi</a>
-                </div>
-            </div>
-        </div>
+        @endforeach
 
         <!-- Slider Navigation Dots -->
         <div class="slider-nav">
@@ -377,7 +387,7 @@
                 <!-- About Image -->
                 <div class="about-image" style="flex: 1; min-width: 300px;">
                     <div style="position: relative;">
-                        <img src="{{asset('landing_assets/images/banner/ig1.jpeg')}}" alt="Law Firm Team"
+                        <img src="{{ asset('landing_assets/images/banner/ig1.jpeg') }}" alt="Law Firm Team"
                             style="width: 100%; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     </div>
                 </div>
@@ -410,7 +420,8 @@
             <div class="vmc-cards"
                 style="display: flex; flex-wrap: wrap; gap: 2rem; margin: 4rem 0; justify-content: center;">
                 <!-- Vision Card -->
-                <div class="vmc-card" style="
+                <div class="vmc-card"
+                    style="
                     flex: 1; 
                     min-width: 250px; 
                     max-width: 350px;
@@ -427,7 +438,8 @@
                     background-position: center;
                     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
                 ">
-                    <div style="
+                    <div
+                        style="
                         width: 60px; 
                         height: 60px; 
                         background-color: rgba(202, 168, 104, 0.9); 
@@ -451,13 +463,15 @@
                         integritas.
                     </p>
                     <div style="position: relative; z-index: 2; margin-top: 2rem;">
-                        <div style="width: 40px; height: 3px; background-color: var(--secondary); margin-bottom: 1rem;">
+                        <div
+                            style="width: 40px; height: 3px; background-color: var(--secondary); margin-bottom: 1rem;">
                         </div>
                     </div>
                 </div>
 
                 <!-- Mission Card -->
-                <div class="vmc-card" style="
+                <div class="vmc-card"
+                    style="
                     flex: 1; 
                     min-width: 250px; 
                     max-width: 350px;
@@ -474,7 +488,8 @@
                     background-position: center;
                     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
                 ">
-                    <div style="
+                    <div
+                        style="
                         width: 60px; 
                         height: 60px; 
                         background-color: rgba(202, 168, 104, 0.9); 
@@ -497,7 +512,8 @@
                         secara bisnis.
                     </p>
                     <div style="position: relative; z-index: 2; margin-top: 2rem;">
-                        <div style="width: 40px; height: 3px; background-color: var(--secondary); margin-bottom: 1rem;">
+                        <div
+                            style="width: 40px; height: 3px; background-color: var(--secondary); margin-bottom: 1rem;">
                         </div>
                     </div>
                 </div>
@@ -507,261 +523,40 @@
 
     <!-- Services Section -->
     <section class="services-section" id="service"
-        style="padding: 5rem 0; background: url('{{asset('landing_assets/images/ctr old/landing_01.jpg')}}') no-repeat center center / cover;">
+        style="padding: 5rem 0; background: url('{{ asset('landing_assets/images/ctr old/landing_01.jpg') }}') no-repeat center center / cover;">
         <div class="container">
             <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
                 <span
-                    style="color: var(--secondary); font-weight: 600; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">LAYANAN
-                    KAMI</span>
-                <h2 style="font-size: 2.2rem; color: var(--primary); margin-bottom: 1rem;">Layanan Hukum Profesional
+                    style="color: var(--secondary); font-weight: 600; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">
+                    LAYANAN KAMI</span>
+                <h2 style="font-size: 2.2rem; color: white; margin-bottom: 1rem;">Layanan Hukum Profesional
                 </h2>
-                <p style="max-width: 700px; margin: 0 auto; color: #555;">
+                <p style="max-width: 700px; margin: 0 auto; color: #eee;">
                     Kami menyediakan berbagai layanan hukum komprehensif untuk memenuhi kebutuhan hukum bisnis maupun
                     pribadi Anda.
                 </p>
             </div>
 
-            <div class="services-grid"
-                style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem;">
-
-                <!-- Service 1 - Hukum Perdata -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-handshake" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">HUKUM PERDATA</h3>
+            <div class="services-grid">
+                @foreach ($layanans as $index => $layanan)
+                    <div class="collapse-container" id="collapse-{{ $index }}">
+                        <div class="collapse-header" onclick="toggleCollapse(this)">
+                            {{ strtoupper($layanan->judul) }}
+                        </div>
+                        <div class="collapse-body">
+                            {{ $layanan->keterangan }}
+                            <br>
+                            <a href="https://wa.me/6281218473429?text=Halo, saya ingin berkonsultasi mengenai layanan {{ urlencode($layanan->judul) }}"
+                                target="_blank">
+                                Konsultasi Sekarang
+                            </a>
+                        </div>
                     </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Penanganan perkara perdata seperti perjanjian, utang-piutang, ganti rugi, dan sengketa hak
-                            milik.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%20Hukum%20Perdata."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 2 - Hukum Pidana -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-gavel" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">HUKUM PIDANA</h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Pendampingan hukum untuk kasus pidana mulai penyelidikan sampai dengan pengadilan.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%20Hukum%20Pidana."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 3 - Hukum Keluarga -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-home" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">HUKUM KELUARGA</h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Penyelesaian masalah keluarga seperti perceraian, hak asuh anak, waris, dan perwalian.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%20Hukum%20Keluarga."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 4 - Hukum Pertanahan -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-landmark" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">HUKUM PERTANAHAN</h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Penyelesaian sengketa tanah, pendaftaran hak milik, sertifikasi, dan masalah agraria.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%20Hukum%20Pertanahan."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 5 - Hukum Perbankan -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-piggy-bank" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">HUKUM PERBANKAN</h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Pendampingan hukum terkait perjanjian kredit, pembiayaan, dan sengketa perbankan.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%20Hukum%20Perbankan."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 6 - Hukum Ketenagakerjaan -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-briefcase" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">HUKUM KETENAGAKERJAAN
-                        </h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Penyelesaian perselisihan hubungan industrial antara pekerja dan pengusaha.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%20Hukum%20Ketenagakerjaan."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 7 - Litigasi -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-balance-scale" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">LITIGASI</h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Penyelesaian sengketa melalui proses pengadilan dengan pendampingan advokat berpengalaman.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%20Litigasi."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 8 - Hukum Perusahaan -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-building" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">HUKUM PERUSAHAAN</h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Pendampingan hukum untuk perusahaan termasuk kontrak, compliance, dan struktur bisnis.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%20Hukum%20Perusahaan."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 9 - Hukum Keimigrasian -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-passport" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">HUKUM KEIMIGRASIAN
-                        </h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Konsultasi dan bantuan hukum terkait regulasi keimigrasian, deportasi, dan status tinggal
-                            warga asing.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%20Hukum%20Keimigrasian."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 10 - Dokumen Perjalanan -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-id-card" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">DOKUMEN PERJALANAN
-                        </h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Layanan pengurusan paspor, visa, dan dokumen legalitas perjalanan dalam dan luar negeri.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20pengurusan%20dokumen%20perjalanan."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 11 - Pengurusan KITAS -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-user-check" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">PENGURUSAN KITAS</h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Pendampingan lengkap dalam proses pengajuan dan perpanjangan Izin Tinggal Terbatas (KITAS).
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20pengurusan%20KITAS."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 12 - Tindak Pidana Keimigrasian -->
-                <div class="service-card"
-                    style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; width: 100%; max-width: 350px;">
-                    <div class="service-icon" style="padding: 1.5rem; text-align: center;">
-                        <i class="fas fa-user-secret" style="font-size: 2.5rem; color: black;"></i>
-                        <h3 style="font-size: 1.5rem; color: var(--primary); margin-top: 0.5rem;">TINDAK PIDANA
-                            KEIMIGRASIAN</h3>
-                    </div>
-                    <div class="service-content" style="padding: 1.5rem; padding-top: 0;">
-                        <p style="color: #555; margin-bottom: 1.5rem;">
-                            Bantuan hukum terhadap pelanggaran hukum keimigrasian seperti overstay, dokumen palsu, dan
-                            penyalahgunaan izin tinggal.
-                        </p>
-                        <a href="https://wa.me/6281218473429?text=Halo%2C%20saya%20ingin%20berkonsultasi%20mengenai%20tindak%20pidana%20keimigrasian."
-                            target="_blank" class="service-btn"
-                            style="display: inline-block; padding: 0.8rem 1.5rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
-                            Konsultasi Sekarang
-                        </a>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>
+
 
     <!-- Why Choose Us Section -->
     <section class="why-choose-us" style="padding: 5rem 0; background-color: #f9f9f9;">
@@ -815,7 +610,8 @@
                         style="width: 70px; height: 70px; background-color: rgba(202, 168, 104, 0.1); display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 1.5rem;">
                         <i class="fas fa-lock" style="font-size: 2rem; color: var(--secondary);"></i>
                     </div>
-                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--primary);">Kerahasiaan Terjamin</h3>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--primary);">Kerahasiaan Terjamin
+                    </h3>
                     <p style="color: #555;">
                         Kami menjaga kerahasiaan klien dengan sangat serius. Semua informasi yang Anda berikan
                         dilindungi sepenuhnya.
@@ -868,12 +664,13 @@
 
             <!-- Testimonials -->
             <div class="testimonials" style="margin-top: 5rem;">
-                <h3 style="text-align: center; font-size: 1.5rem; margin-bottom: 2rem; color: var(--primary);">Apa Kata
-                    Klien Kami</h3>
+    <h3 style="text-align: center; font-size: 1.5rem; margin-bottom: 2rem; color: var(--primary);">Apa Kata Klien Kami</h3>
 
-                <div class="testimonial-grid"
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                    <!-- Testimonial 1 -->
+    <!-- Swiper Container -->
+    <div class="swiper testimonial-swiper">
+        <div class="swiper-wrapper">
+            @foreach ($testis as $testi)
+                <div class="swiper-slide">
                     <div class="testimonial-card"
                         style="background-color: white; border-radius: 8px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;">
                         <div class="quote-icon"
@@ -882,69 +679,30 @@
                         </div>
                         <div class="testimonial-content" style="margin-bottom: 1.5rem;">
                             <p style="font-style: italic; color: #555; position: relative; z-index: 1;">
-                                "Tim Siagian Sudibyo sangat profesional dalam menangani kasus hukum perusahaan kami.
-                                Mereka memberikan solusi yang tepat dan efisien."
+                                "{{$testi->testi}}"
                             </p>
                         </div>
                         <div class="testimonial-author" style="display: flex; align-items: center;">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client"
+                            <img src="{{asset('landing_assets/images/others/default.jpg')}}" alt="Client"
                                 style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 1rem;">
                             <div>
-                                <h4 style="margin: 0; color: var(--primary);">Budi Santoso</h4>
-                                <p style="margin: 0; color: var(--secondary); font-size: 0.9rem;">Direktur PT Abadi Jaya
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 2 -->
-                    <div class="testimonial-card"
-                        style="background-color: white; border-radius: 8px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;">
-                        <div class="quote-icon"
-                            style="position: absolute; top: 20px; right: 20px; color: rgba(202, 168, 104, 0.2); font-size: 3rem;">
-                            <i class="fas fa-quote-right"></i>
-                        </div>
-                        <div class="testimonial-content" style="margin-bottom: 1.5rem;">
-                            <p style="font-style: italic; color: #555; position: relative; z-index: 1;">
-                                "Saya sangat merekomendasikan Siagian Sudibyo & Co untuk masalah hukum apa pun.
-                                Responsif, kompeten, dan benar-benar memahami kebutuhan klien."
-                            </p>
-                        </div>
-                        <div class="testimonial-author" style="display: flex; align-items: center;">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client"
-                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 1rem;">
-                            <div>
-                                <h4 style="margin: 0; color: var(--primary);">Dewi Lestari</h4>
-                                <p style="margin: 0; color: var(--secondary); font-size: 0.9rem;">Pengusaha Properti</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="testimonial-card"
-                        style="background-color: white; border-radius: 8px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;">
-                        <div class="quote-icon"
-                            style="position: absolute; top: 20px; right: 20px; color: rgba(202, 168, 104, 0.2); font-size: 3rem;">
-                            <i class="fas fa-quote-right"></i>
-                        </div>
-                        <div class="testimonial-content" style="margin-bottom: 1.5rem;">
-                            <p style="font-style: italic; color: #555; position: relative; z-index: 1;">
-                                "Proses pendirian PT kami diselesaikan dengan sangat cepat dan tanpa kendala. Terima
-                                kasih atas pelayanan yang luar biasa!"
-                            </p>
-                        </div>
-                        <div class="testimonial-author" style="display: flex; align-items: center;">
-                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client"
-                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 1rem;">
-                            <div>
-                                <h4 style="margin: 0; color: var(--primary);">Andi Wijaya</h4>
-                                <p style="margin: 0; color: var(--secondary); font-size: 0.9rem;">Co-Founder Startup
-                                    Tech</p>
+                                <h4 style="margin: 0; color: var(--primary);">{{$testi->nama}}</h4>
+                                <p style="margin: 0; color: var(--secondary); font-size: 0.9rem;">{{$testi->asal}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
+        </div>
+
+        <!-- Swiper Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <!-- Swiper Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+
         </div>
     </section>
 
@@ -959,19 +717,35 @@
 
             <div class="mansory-gallery">
                 <div class="column">
-                    <img style="cursor: pointer;" src="{{asset('landing_assets/images/gallery/1.jpg')}}">
-                    <img style="cursor: pointer;" src="{{asset('landing_assets/images/gallery/2.jpg')}}">
-                    <img style="cursor: pointer;" src="{{asset('landing_assets/images/gallery/11.jpg')}}">
-                    <img style="cursor: pointer;" src="{{asset('landing_assets/images/gallery/19.jpg')}}">
-                    <img style="cursor: pointer;" src="{{asset('landing_assets/images/gallery/5.jpg')}}">
-                    <img style="cursor: pointer;" src="{{asset('landing_assets/images/gallery/4.jpg')}}">
-                    <img style="cursor: pointer;" src="{{asset('landing_assets/images/gallery/7.jpg')}}">
-                    <img style="cursor: pointer;" src="{{asset('landing_assets/images/gallery/24.jpg')}}">
+                    @foreach ($galeris as $item)
+                        <div class="image-wrapper" style="position: relative; margin-bottom: 1.5rem;" data-keterangan="{{ $item->keterangan }}">
+                            <img style="cursor: pointer; width: 100%; display: block;" src="{{ asset('storage/'.$item->gambar) }}">
+                            <div style="
+                                position: absolute;
+                                bottom: 20px;
+                                left: 0;
+                                right: 0;
+                                margin-left: 20px;
+                                margin-right: 20px;
+                                background: rgba(0, 0, 0, 0.8);
+                                color: white;
+                                padding: 6px 10px;
+                                border-radius: 5px;
+                                font-size: 0.9rem;
+                                box-sizing: border-box;
+                                text-align: center;
+                            ">
+                                {{ $item->keterangan }}
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
+
             <div style="text-align: center; margin-top: 3rem;">
-                <a href="gallery.html" class="btn" style="
+                <a href="/galeri-kami" class="btn"
+                    style="
                     background-color: var(--primary);
                     color: white;
                     padding: 0.8rem 2rem;
@@ -1009,7 +783,8 @@
                         <div
                             style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
                             <div class="lawyer-image" style="height: 250px; overflow: hidden;">
-                                <img src="{{asset('landing_assets/images/lawyers/sadrach.jpeg')}}" alt="Sadrach Meilando Siagian, S.H"
+                                <img src="{{ asset('landing_assets/images/lawyers/sadrach.jpeg') }}"
+                                    alt="Sadrach Meilando Siagian, S.H"
                                     style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
 
                             </div>
@@ -1044,12 +819,14 @@
                         <div
                             style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
                             <div class="lawyer-image" style="height: 250px; overflow: hidden;">
-                                <img src="{{asset('landing_assets/images/lawyers/putra.jpeg')}}" alt="Ardik Putra Pratama Sudibyo, S.H"
+                                <img src="{{ asset('landing_assets/images/lawyers/putra.jpeg') }}"
+                                    alt="Ardik Putra Pratama Sudibyo, S.H"
                                     style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
 
                             </div>
                             <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
-                                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary);">Ardik Putra
+                                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary);">Ardik
+                                    Putra
                                     Pratama Sudibyo, S.H</h3>
                                 <p
                                     style="color: #555; margin-bottom: 1rem; height: 72px; overflow: hidden; font-size: 0.9rem;">
@@ -1079,7 +856,8 @@
                         <div
                             style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
                             <div class="lawyer-image" style="height: 250px; overflow: hidden;">
-                                <img src="{{asset('landing_assets/images/lawyers/hosbal.jpeg')}}" alt="Hosbal Maruli Sihombing, S.H"
+                                <img src="{{ asset('landing_assets/images/lawyers/hosbal.jpeg') }}"
+                                    alt="Hosbal Maruli Sihombing, S.H"
                                     style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
                             </div>
                             <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
@@ -1113,7 +891,8 @@
                         <div
                             style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
                             <div class="lawyer-image" style="height: 250px; overflow: hidden;">
-                                <img src="{{asset('landing_assets/images/lawyers/lamrida.jpeg')}}" alt="Lamria Sirait, S.H"
+                                <img src="{{ asset('landing_assets/images/lawyers/lamrida.jpeg') }}"
+                                    alt="Lamria Sirait, S.H"
                                     style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
                             </div>
                             <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
@@ -1165,49 +944,14 @@
                 </p>
             </div>
 
-            <div class="client-logos"
-                style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem;">
-                <!-- Repeat logo blocks -->
-                <div class="client-logo"
-                    style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
-                    <img src="{{asset('landing_assets/images/clients/harum.png')}}" alt="Client 1"
-                        style="max-width: 150px; max-height: 80px; object-fit: contain;">
-                </div>
-                <div class="client-logo"
-                    style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
-                    <img src="{{asset('landing_assets/images/clients/japasian.jpeg')}}" alt="Client 2"
-                        style="max-width: 150px; max-height: 80px; object-fit: contain;">
-                </div>
-                <div class="client-logo"
-                    style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
-                    <img src="{{asset('landing_assets/images/clients/latitude.png')}}" alt="Client 3"
-                        style="max-width: 150px; max-height: 80px; object-fit: contain;">
-                </div>
-                <div class="client-logo"
-                    style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
-                    <img src="{{asset('landing_assets/images/clients/mabora.jpeg')}}" alt="Client 4"
-                        style="max-width: 150px; max-height: 80px; object-fit: contain;">
-                </div>
-                <div class="client-logo"
-                    style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
-                    <img src="{{asset('landing_assets/images/clients/mandala.jpg')}}" alt="Client 5"
-                        style="max-width: 150px; max-height: 80px; object-fit: contain;">
-                </div>
-                <div class="client-logo"
-                    style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
-                    <img src="{{asset('landing_assets/images/clients/nk.jpeg')}}" alt="Client 6"
-                        style="max-width: 150px; max-height: 80px; object-fit: contain;">
-                </div>
-                <div class="client-logo"
-                    style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
-                    <img src="{{asset('landing_assets/images/clients/pungkook.jpg')}}" alt="Client 7"
-                        style="max-width: 150px; max-height: 80px; object-fit: contain;">
-                </div>
-                <div class="client-logo"
-                    style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
-                    <img src="{{asset('landing_assets/images/clients/vautid.png')}}" alt="Client 8"
-                        style="max-width: 150px; max-height: 80px; object-fit: contain;">
-                </div>
+            <div class="client-logos" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem;">
+                @foreach ($clients as $client)
+                    <div class="client-logo"
+                        style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
+                        <img src="{{ asset('storage') . '/' . $client->logo}}" alt="{{$client->logo}}"
+                            style="max-width: 150px; max-height: 80px; object-fit: contain;">
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -1215,6 +959,7 @@
     <div id="lightbox" class="lightbox">
         <span class="close">&times;</span>
         <img class="lightbox-img" src="" alt="">
+        <div class="caption" style="color: white; text-align: center; margin-top: 15px; font-size: 1rem;"></div>
         <button class="nav prev">&#10094;</button>
         <button class="nav next">&#10095;</button>
     </div>
@@ -1296,7 +1041,8 @@
 
 
     <!-- CTA Section with Parallax Background -->
-    <section class="cta-section" style="
+    <section class="cta-section"
+        style="
                 padding: 4rem 0;
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                             url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
@@ -1335,7 +1081,8 @@
                 <!-- Footer Column 1 - About -->
                 <div class="footer-col">
                     <div class="footer-logo" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <img src="{{asset('landing_assets/logo/logo.png')}}" alt="LawFirm Logo" style="height: 50px; margin-right: 10px;">
+                        <img src="{{ asset('landing_assets/logo/logo.png') }}" alt="LawFirm Logo"
+                            style="height: 50px; margin-right: 10px;">
                         <div>
                             <h3 style="color: white; margin: 0; font-size: 1rem;">SIAGIAN SUDIBYO & CO</h3>
                             <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.9rem;">Lawyer & Law Firm
@@ -1540,7 +1287,33 @@
         </div>
     </footer>
 
-    <script src="{{asset('landing_assets/js/script.js')}}"></script>
+    <script src="{{ asset('landing_assets/js/script.js') }}"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.testimonial-swiper', {
+            loop: true,
+            spaceBetween: 30,
+            slidesPerView: 1,
+            autoplay: {
+                delay: 4000, // 4 detik
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            }
+        });
+    </script>
+
 </body>
 
 </html>

@@ -9,7 +9,7 @@
                         <h4>User</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                        <button class="btn btn-success" id="tambah-data">Tambah User</button>
+                        <button class="btn btn-success" id="tambah-data">Tambah Testimoni</button>
                     </div>
                 </div>
             </div>
@@ -27,44 +27,25 @@
                                         <tr>
                                             <th style="width: 10%; font-size: 18px" class="text-center">No. </th>
                                             <th style="font-size: 18px" class="text-center">Nama</th>
-                                            <th style="width: 10%; font-size: 18px" class="text-center">Username</th>
-                                            <th style="width: 10%; font-size: 18px" class="text-center">Role</th>
-                                            <th style="width: 30%; font-size: 18px" class="text-center">Info Peserta</th>
+                                            <th style="font-size: 18px" class="text-center">Asal</th>
+                                            <th style="width: 60%; font-size: 18px" class="text-center">Testimoni</th>
                                             <th style="width: 10%; font-size: 18px" class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $index = 1; @endphp
-                                        @foreach ($users as $user)
+                                        @foreach ($testis as $testi)
                                             <tr>
                                                 <td style="font-size: 18px" cla ss="text-center">{{ $index++ }}</td>
-                                                <td style="font-size: 18px">{{ $user->name }}</td>
-                                                <td style="font-size: 18px">{{ $user->username }}</td>
-                                                <td style="font-size: 18px">{{ $user->role }}</td>
-                                                <td style="font-size: 18px">
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <span class="badge text-bg-success">Dibuat</span>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            : {{$user->created_at}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-1">
-                                                        <div class="col-md-3">
-                                                            <span class="badge text-bg-warning">Update</span>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            : {{$user->updated_at}}
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td style="font-size: 18px">{{ $testi->nama }}</td>
+                                                <td style="font-size: 18px">{{ $testi->asal }}</td>
+                                                <td style="font-size: 18px">{{ $testi->testi }}</td>
                                                 <td class="text-center">
                                                     <ul class="action d-flex justify-content-center">
-                                                        <li class="edit" data-id="{{ $user->id }}"> <a
+                                                        <li class="edit" data-id="{{ $testi->id }}"> <a
                                                                 href="#"><i class="icon-pencil-alt"
                                                                     style="font-size: 25px"></i></a></li>
-                                                        <li class="delete" data-id="{{ $user->id }}"><a
+                                                        <li class="delete" data-id="{{ $testi->id }}"><a
                                                                 href="#"><i class="icon-trash"
                                                                     style="font-size: 25px"></i></a></li>
                                                     </ul>
@@ -86,7 +67,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Arsip</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Testimoni</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
@@ -96,29 +77,27 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="nama">Nama User</label>
+                                            <label class="form-label" for="nama">Nama</label>
                                             <input type="text" class="form-control input-air-primary" id="nama"
-                                                placeholder="Masukkan Nama User" required>
+                                                placeholder="Masukkan Nama" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="username">Username</label>
-                                            <input type="text" class="form-control input-air-primary" id="username"
-                                                placeholder="Masukkan Username" required>
+                                            <label class="form-label" for="asal">Asal</label>
+                                            <input type="text" class="form-control input-air-primary" id="asal"
+                                                placeholder="Masukkan Asal" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="role">Pilih Role</label>
-                                            <select class="form-control input-air-primary" id="role">
-                                                <option value="Admin">Admin</option>
-                                                <option value="Lawyer">Lawyer</option>
-                                            </select>
+                                            <label class="form-label" for="testi">Testimoni</label>
+                                            <textarea class="form-control input-air-primary" id="testi"
+                                                placeholder="Masukkan Testimoni" required cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +118,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Edit Arsip</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Edit Layanan</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
@@ -150,29 +129,27 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="edit_nama">Nama User</label>
+                                            <label class="form-label" for="edit_nama">Nama</label>
                                             <input type="text" class="form-control input-air-primary" id="edit_nama"
-                                                placeholder="Masukkan Nama User" required>
+                                                placeholder="Masukkan Nama" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="edit_username">Username</label>
-                                            <input type="text" class="form-control input-air-primary" id="edit_username"
-                                                placeholder="Masukkan Username" required>
+                                            <label class="form-label" for="edit_asal">Asal</label>
+                                            <input type="text" class="form-control input-air-primary" id="edit_asal"
+                                                placeholder="Masukkan Asal" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="edit_role">Pilih Role</label>
-                                            <select class="form-control input-air-primary" id="edit_role">
-                                                <option value="Admin">Admin</option>
-                                                <option value="Lawyer">Lawyer</option>
-                                            </select>
+                                            <label class="form-label" for="edit_testi">Testimoni</label>
+                                            <textarea class="form-control input-air-primary" id="edit_testi"
+                                                placeholder="Masukkan Testimoni" required cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -236,5 +213,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{ asset('own_assets/scripts/user.js') }}"></script>
+    <script src="{{ asset('own_assets/scripts/testi.js') }}"></script>
 @endsection
