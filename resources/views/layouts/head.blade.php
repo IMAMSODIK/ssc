@@ -41,6 +41,8 @@
 <link id="color" media="screen" rel="stylesheet" href="{{asset('dashboard_assets/assets/css/color-1.css')}}">
 <!-- Responsive css-->
 <link rel="stylesheet" type="text/css" href="{{asset('dashboard_assets/assets/css/responsive.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('dashboard_assets/assets/css/vendors/quill.snow.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('dashboard_assets/assets/css/vendors/quill.bubble.css')}}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 

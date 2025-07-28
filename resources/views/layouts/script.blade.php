@@ -38,6 +38,7 @@
 <!-- Theme js-->
 <script src="{{ asset('dashboard_assets/assets/js/script.js') }}"></script>
 <script src="{{ asset('dashboard_assets/assets/js/theme-customizer/customizer.js') }}"></script>
+<script src="{{asset('dashboard_assets/assets/js/editors/quill.js')}}"></script>
 
 <script>
     new WOW().init();

@@ -335,12 +335,12 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
- function toggleCollapse(header) {
+function toggleCollapse(header) {
     // Dapatkan elemen terkait
     const container = header.parentElement;
     const body = header.nextElementSibling;
     const isOpen = body.classList.contains('open');
-    
+
     // Tutup semua collapse body dalam services-grid
     const allBodies = document.querySelectorAll('.collapse-body');
     allBodies.forEach(el => {
@@ -349,7 +349,7 @@ document.addEventListener('keydown', (e) => {
             el.style.maxHeight = null;
         }
     });
-    
+
     // Toggle collapse yang diklik
     if (!isOpen) {
         body.classList.add('open');
@@ -359,3 +359,40 @@ document.addEventListener('keydown', (e) => {
         body.style.maxHeight = null;
     }
 }
+
+const btn = document.getElementById('floating-button');
+const closeFloatBtn = document.getElementById('close-btn');
+
+// Close button
+closeFloatBtn.addEventListener('click', () => {
+    btn.style.display = 'none';
+});
+
+// Drag freely
+let isDragging = false;
+let offsetX, offsetY;
+
+btn.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    const rect = btn.getBoundingClientRect();
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+    btn.style.transition = 'none'; // Disable smooth move
+    document.body.style.userSelect = 'none';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        const x = e.clientX - offsetX;
+        const y = e.clientY - offsetY;
+        btn.style.left = x + 'px';
+        btn.style.top = y + 'px';
+        btn.style.right = 'auto';
+        btn.style.bottom = 'auto';
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+    document.body.style.userSelect = '';
+});

@@ -22,7 +22,7 @@ class WebModelSeeder extends Seeder
             'instagram' => 'https://www.instagram.com/ssc.lawfirm?igsh=MWx5M3p0NG9ybHU5',
             'email' => null,
             'created_by' => 1,
-            'updated_by' => 2
+            'updated_by' => 1
         ]);
     }
 }

@@ -73,6 +73,12 @@
                         </svg><span class="">Web Profile</span></a>
                 </li>
 
+                {{-- <li class="sidebar-list" style="margin-top: -20px"><i class="fa fa-thumb-products"></i><a
+                        class="sidebar-link sidebar-title link-nav" href="/lawyers">
+                        <i class="fa fa-cubes text-white" aria-hidden="true"></i>
+                        </svg><span class="">Lawyers</span></a>
+                </li> --}}
+
                 <li class="sidebar-list" style="margin-top: -20px"><i class="fa fa-thumb-products"></i><a
                         class="sidebar-link sidebar-title link-nav" href="/banner">
                         <i class="fa fa-cubes text-white" aria-hidden="true"></i>

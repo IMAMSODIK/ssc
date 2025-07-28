@@ -548,7 +548,7 @@
                             <br>
                             <a href="https://wa.me/6281218473429?text=Halo, saya ingin berkonsultasi mengenai layanan {{ urlencode($layanan->judul) }}"
                                 target="_blank">
-                                Konsultasi Sekarang
+                                Tanya Bang Bardik
                             </a>
                         </div>
                     </div>
@@ -806,7 +806,7 @@
                                     <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
                                             class="fas fa-phone-alt"></i></a>
                                 </div>
-                                <a href="sadrach.html" class="btn"
+                                <a href="/sadrach" class="btn"
                                     style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
                                     Lihat Profil Lengkap
                                 </a>
@@ -843,7 +843,7 @@
                                     <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
                                             class="fas fa-phone-alt"></i></a>
                                 </div>
-                                <a href="ardik.html" class="btn"
+                                <a href="/ardik" class="btn"
                                     style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
                                     Lihat Profil Lengkap
                                 </a>
@@ -878,7 +878,7 @@
                                     <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
                                             class="fas fa-phone-alt"></i></a>
                                 </div>
-                                <a href="hosbal.html" class="btn"
+                                <a href="/hosbal" class="btn"
                                     style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
                                     Lihat Profil Lengkap
                                 </a>
@@ -1281,11 +1281,16 @@
         </div>
 
         <!-- Back to Top Button -->
-        <div class="back-to-top"
+        {{-- <div class="back-to-top"
             style="position: fixed; bottom: 20px; right: 20px; background-color: var(--secondary); color: var(--primary); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 99; opacity: 0; visibility: hidden; transition: all 0.3s ease;">
             <i class="fas fa-arrow-up"></i>
-        </div>
+        </div> --}}
     </footer>
+
+    <div id="floating-button" onclick="location.href = 'https://wa.me/6281218473429?text=Halo Bang Bardik, saya ingin berkonsultasi mengenai layanan HUKUM yang anda berikan'">
+        <button id="close-btn">×</button>
+        <img src="{{asset('landing_assets/images/others/karakter.png')}}" alt="Floating" />
+    </div>
 
     <script src="{{ asset('landing_assets/js/script.js') }}"></script>
     <!-- Swiper JS -->

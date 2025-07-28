@@ -6,7 +6,7 @@
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
-                        <h4>User</h4>
+                        <h4>Web Profile</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
                         <button class="btn btn-success" id="tambah-data">Update Web</button>
@@ -113,7 +113,6 @@
                                             <img id="preview-logo" src="" alt="Preview Logo"
                                                 style="display:none; max-width: 200px; margin-top:10px;" />
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="row">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -170,7 +171,8 @@ class UserController extends Controller
 
     public function profile(){
         $data = [
-            'pageTitle' => "Profile"
+            'pageTitle' => "Profile",
+            'profile' => User::with('profile')->where('id', Auth::id())->first()
         ];
         return view('users.profile', $data);
     }
