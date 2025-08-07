@@ -981,13 +981,13 @@
                 untuk konsultasi awal gratis.
             </p>
             <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                <a href="#" class="btn"
+                {{-- <a href="#" class="btn"
                     style="background-color: var(--secondary); color: var(--primary); padding: 1rem 2rem; font-weight: 600; border-radius: 4px; text-decoration: none; transition: all 0.3s ease;">
                     <i class="fas fa-phone-alt" style="margin-right: 0.5rem;"></i> Hubungi Kami
-                </a>
+                </a> --}}
                 <a href="#" class="btn"
                     style="background-color: transparent; color: white; padding: 1rem 2rem; font-weight: 600; border-radius: 4px; text-decoration: none; border: 2px solid var(--secondary); transition: all 0.3s ease;">
-                    <i class="fas fa-calendar-alt" style="margin-right: 0.5rem;"></i> Jadwalkan Konsultasi
+                    <i class="fas fa-phone-alt" style="margin-right: 0.5rem;"></i> Hubungi Kami
                 </a>
             </div>
         </div>
@@ -1093,46 +1093,16 @@
                             style="position: absolute; bottom: 0; left: 0; width: 50px; height: 2px; background-color: var(--secondary);"></span>
                     </h3>
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Advokasi & Litigasi
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Hukum Bisnis & Korporasi
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Hukum Ketenagakerjaan
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Hukum Kekayaan Intelektual
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Hukum Keluarga & Waris
-                            </a>
-                        </li>
+                        @foreach ($layanans as $l)
+                            <li style="margin-bottom: 0.8rem;">
+                                <a href="#services-section"
+                                    style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                    <i class="fas fa-chevron-right"
+                                        style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
+                                    {{$l->judul}}
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
 
