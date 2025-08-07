@@ -81,6 +81,27 @@ class AktifitasController extends Controller
         ]);
     }
 
+    public function detail(Request $request)
+    {
+        $aktifitas = Aktifitas::where('judul', $request->judul)->first();
+        
+        $data = [
+            'pageTitle' => 'Detail Aktifitas',
+            'aktifitas' => $aktifitas,
+            'aktifitases' => Aktifitas::where('judul', '!=', $request->judul)
+                    ->orderBy('created_at', 'desc')
+                    ->take(5)
+                    ->get()
+        ];
+
+
+        if ($aktifitas) {
+            return view('aktifitas.detail', $data);
+        }
+
+        return redirect()->back();
+    }
+
 
     public function update(Request $request)
     {

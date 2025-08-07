@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -175,5 +177,103 @@ class UserController extends Controller
             'profile' => User::with('profile')->where('id', Auth::id())->first()
         ];
         return view('users.profile', $data);
+    }
+
+    public function editLawyer(){
+        try {
+            $profile = User::with('profile')->where('id', Auth::id())->first();
+
+            if ($profile) {
+                return response()->json([
+                    'status' => true,
+                    'data' => $profile
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function detailLawyer(Request $r){
+        try {
+            $profile = User::with('profile')->where('name', $r->lawyer)->first();
+            $data = [
+                'pageTitle' => "Detai Lawyer",
+                'profile' => $profile
+            ];
+
+            if ($profile) {
+                return view('lawyer.detail', $data);
+            }
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function updateLawyer(Request $r){
+        $validatedData = $r->validate([
+            'nama' => 'required|string',
+            'detail' => 'nullable|string',
+            'facebook' => 'nullable|string',
+            'whatsapp' => 'nullable|string',
+            'instagram' => 'nullable|string',
+            'email' => 'nullable|string',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5000',
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'gambar.image' => 'File harus berupa gambar.',
+            'gambar.mimes' => 'Gambar hanya boleh jpg, jpeg, png, atau webp.',
+            'gambar.max' => 'Ukuran Gambar maksimal 4MB.',
+        ]);
+
+        try {
+            $user = User::where('id', Auth::id())->first();
+            $profile = Profile::where('user_id', $user->id)->first();
+
+            if (!$user) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Data profil tidak ditemukan.'
+                ]);
+            }
+
+            if ($r->hasFile('gambar')) {
+                if ($profile->gambar && Storage::exists('public/' . $profile->gambar)) {
+                    Storage::delete('public/' . $profile->gambar);
+                }
+
+                $file = $r->file('gambar');
+                $path = $file->store('lawyer', 'public');
+                $profile->gambar = $path;
+            }
+
+            $user->name = $r->nama;
+            $profile->detail = $r->detail;
+            $profile->facebook = $r->facebook;
+            $profile->whatsapp = $r->whatsapp;
+            $profile->instagram = $r->instagram;
+            $profile->email = $r->email;
+            $profile->save();
+            $user->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Profil berhasil diperbarui.',
+                'data' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ]);
+        }
     }
 }

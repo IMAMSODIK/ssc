@@ -1332,7 +1332,7 @@
                 <!-- About Image -->
                 <div class="about-image" style="flex: 1; min-width: 300px;">
                     <div style="position: relative;">
-                        <img src="{{asset('landing_assets/images/lawyers/sadrach.jpeg')}}" alt="Law Firm Team"
+                        <img src="{{($profile->profile->gambar) ? asset('storage') . '/' . $profile->profile->gambar : asset('own_assets/images/user.png')}}" alt="Law Firm Team"
                             style="width: 100%; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     </div>
                 </div>
@@ -1342,63 +1342,9 @@
                     <span style="color: var(--secondary); font-weight: 600; letter-spacing: 1px;">TENTANG LAWYERS
                         KAMI</span>
                     <h2 style="font-size: 2.2rem; margin: 0.5rem 0 1.5rem; color: var(--primary); line-height: 1.3;">
-                        Sadrach Meilando Siagian, S.H</h2>
+                        {{$profile->name}}</h2>
                     <div style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #555; max-width: 800px; margin: 0 auto;">
-                        <p style="margin-bottom: 1.5rem; text-align: justify;">
-                            <strong style="color: #003366;">Sadrach Siagian, S.H.</strong> adalah Managing Partner dan Pendiri dari Siagian Sudibyo & Co Lawfirm. Beliau merupakan Sarjana Hukum lulusan Fakultas Hukum Universitas HKBP Nommensen di Medan.
-                        </p>
-                        
-                        <p style="margin-bottom: 1.5rem; text-align: justify;">
-                            Sebelum mendirikan firma hukum ini, Sadrach telah mengumpulkan pengalaman profesional yang luas di berbagai bidang, termasuk:
-                        </p>
-                        
-                        <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem; list-style-type: none;">
-                            <li style="margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem;">
-                                <span style="position: absolute; left: 0; color: #003366;">•</span>
-                                Pertanahan dan real estate (perumahan)
-                            </li>
-                            <li style="margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem;">
-                                <span style="position: absolute; left: 0; color: #003366;">•</span>
-                                Perbankan dan keuangan
-                            </li>
-                            <li style="margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem;">
-                                <span style="position: absolute; left: 0; color: #003366;">•</span>
-                                Hukum perusahaan dan korporasi
-                            </li>
-                            <li style="margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem;">
-                                <span style="position: absolute; left: 0; color: #003366;">•</span>
-                                Bisnis dan transaksi komersial
-                            </li>
-                        </ul>
-                        
-                        <p style="margin-bottom: 1.5rem; text-align: justify;">
-                            Dengan pengalaman bertahun-tahun, Sadrach memiliki keahlian khusus dalam:
-                        </p>
-                        
-                        <div style="background: #f5f9ff; padding: 1.5rem; border-left: 4px solid #003366; margin-bottom: 1.5rem; border-radius: 0 4px 4px 0;">
-                            <ul style="margin: 0; padding-left: 1rem; list-style-type: none;">
-                                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem;">
-                                    <span style="position: absolute; left: 0; color: #003366;">✓</span>
-                                    Negosiasi dan peralihan hak atas tanah
-                                </li>
-                                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem;">
-                                    <span style="position: absolute; left: 0; color: #003366;">✓</span>
-                                    Penyusunan strategi bisnis dan pendampingan hukum
-                                </li>
-                                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem;">
-                                    <span style="position: absolute; left: 0; color: #003366;">✓</span>
-                                    Transaksi perbankan dan pembiayaan
-                                </li>
-                                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem;">
-                                    <span style="position: absolute; left: 0; color: #003366;">✓</span>
-                                    Penyelesaian sengketa properti dan bisnis
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <p style="text-align: justify; font-style: italic; color: #666;">
-                            Dengan pendekatan yang komprehensif dan solusi hukum yang tepat, Sadrach telah membantu banyak klien dalam mencapai tujuan bisnis mereka sambil memastikan kepatuhan hukum.
-                        </p>
+                        {!!$profile->profile->detail!!}</h2>
                     </div>
 
                     <!-- <div class="about-features" style="margin-bottom: 2rem;">

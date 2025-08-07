@@ -2,11 +2,24 @@ let table = $("#basic-1").DataTable();
 let jawabIndex = 1;
 let modal = "", target = "", id_ctr = 0;
 
+$(document).ready(function () {
+        $('.summernote').summernote({
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link', 'picture']],
+                ['view', ['codeview']]
+            ]
+        });
+    });
+
 $("#cancel-add").on("click", function () {
     closeModal($("#tambah-data-modal"));
 })
 
-$('#logo').on('change', function () {
+$('#gambar').on('change', function () {
     const file = this.files[0];
     if (file) {
         const reader = new FileReader();
@@ -39,19 +52,19 @@ function openModal(modal) {
     $(modal).modal('show');
 }
 
-$("#tambah-data").on("click", function () {
+$("#update-data").on("click", function(){
     $.ajax({
-        url: '/web-profile/get-data',
+        url: '/profile/edit-lawyer',
         method: 'GET',
         success: function (response) {
             if (response.status) {
-                $('#nama').val(response.data.nama_perusahaan);
-                $('#jargon').val(response.data.jargon_perusahaan)
-                $('#alamat').val(response.data.alamat)
-                $('#whatsapp').val(response.data.whatsapp)
-                $('#instagram').val(response.data.instagram)
-                $('#email').val(response.data.email)
-                $('#preview-logo').prop('src', `../../storage/${response.data.logo}`)
+                $('#nama').val(response.data.name);
+                $('#detail').summernote('code', response.data.profile.detail);
+                $('#instagram').val(response.data.profile.instagram)
+                $('#email').val(response.data.profile.email)
+                $('#whatsapp').val(response.data.profile.whatsapp)
+                $('#email').val(response.data.profile.email)
+                $('#preview-logo').prop('src', `../../storage/${response.data.profile.gambar}`)
                 $('#preview-logo').css('display', '')
                 $("#tambah-data-modal").modal("show");
             } else {
@@ -75,28 +88,28 @@ $("#tambah-data").on("click", function () {
             }
         }
     });
-});
+})
 
 $("#store").on("click", function (e) {
     e.preventDefault();
     $("#tambah-data-modal").modal("hide");
 
     const formData = new FormData();
-    const logoInput = $('#logo')[0].files[0];
-    if (logoInput) {
-        formData.append('logo', logoInput);
+    const gambar = $('#gambar')[0].files[0];
+    if (gambar) {
+        formData.append('gambar', gambar);
     }
 
     formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
     formData.append('nama', $('#nama').val());
-    formData.append('jargon', $('#jargon').val());
-    formData.append('alamat', $('#alamat').val());
+    formData.append('detail', $('#detail').val());
+    formData.append('facebook', $('#facebook').val());
     formData.append('whatsapp', $('#whatsapp').val());
     formData.append('instagram', $('#instagram').val());
     formData.append('email', $('#email').val());
 
     $.ajax({
-        url: '/web-profile/update',
+        url: '/profile/update-lawyer',
         method: 'POST',
         data: formData,
         processData: false,

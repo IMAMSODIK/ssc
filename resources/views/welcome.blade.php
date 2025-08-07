@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIAGIAN SUDIBYO & CO | Mitra Hukum Terpercaya</title>
+    <title>{{ $web->nama_perusahaan }} | Mitra Hukum Terpercaya</title>
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('landing_assets/logo/logo.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('landing_assets/logo/logo.png') }}">
 
@@ -13,13 +13,16 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        .swiper-button-next, .swiper-button-prev {
+        .swiper-button-next,
+        .swiper-button-prev {
             color: #c0a066 !important;
         }
+
         .swiper-pagination-bullet {
             background: #c0a066 !important;
             opacity: 1 !important;
         }
+
         .swiper-pagination-bullet-active {
             background: #303030 !important;
         }
@@ -34,7 +37,7 @@
             <div class="logo">
                 <img src="{{ asset('landing_assets/logo/logo.png') }}" alt="LawFirm Logo">
                 <div class="logo-text">
-                    <h3>SIAGIAN SUDIBYO & CO</h3>
+                    <h3>{{ $web->nama_perusahaan ?? 'SIAGIAN SUDIBYO & CO' }}</h3>
                     <p>Lawyer & Law Firm</p>
                 </div>
             </div>
@@ -46,9 +49,18 @@
                     </div>
                     <div class="info-content">
                         <h3>Telepon</h3>
-                        <p class="clickable-phone" onclick="window.location.href='tel:6281218473429'">+62 812 1847 3429
-                        </p>
+                        @php
+                            $wa = $web->whatsapp ?? '081218473429';
+                            $wa_number = preg_replace('/^0/', '62', $wa);
+                            $wa_text = urlencode('Halo, saya ingin berkonsultasi mengenai layanan anda');
+                        @endphp
+
+                        <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank"
+                            class="" style="text-decoration: none; color: inherit;">
+                            {{ $wa }}
+                        </a>
                     </div>
+
                 </div>
 
                 <div class="info-item">
@@ -57,7 +69,7 @@
                     </div>
                     <div class="info-content">
                         <h3>Alamat</h3>
-                        <p>Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan</p>
+                        <p>{{ $web->alamat ?? 'Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan' }}</p>
                     </div>
                 </div>
             </div>
@@ -80,10 +92,17 @@
                 <li><a href="#attonery">Attorneys</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="#" class="contact-btn" onclick="window.location.href='tel:6281218473429'">
-                <i class="fas fa-phone-alt"></i>
-                Hubungi Sekarang
+
+            @php
+                $wa = $web->whatsapp ?? '081218473429';
+                $wa_number = preg_replace('/^0/', '62', $wa);
+                $wa_text = urlencode('Halo, saya ingin berkonsultasi mengenai layanan anda');
+            @endphp
+
+            <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank" class="contact-btn">
+                Hubungi via WhatsApp
             </a>
+
         </div>
     </nav>
 
@@ -92,7 +111,7 @@
         <div class="logo" style="margin-bottom: 50px; margin-left: 30px">
             <img src="{{ asset('landing_assets/logo/logo.png') }}" alt="LawFirm Logo">
             <div class="logo-text">
-                <h3>SIAGIAN SUDIBYO & CO</h3>
+                <h3>{{ $web->nama_perusahaan ?? 'SIAGIAN SUDIBYO & CO' }}</h3>
                 <p>Lawyer & Law Firm</p>
             </div>
         </div>
@@ -113,7 +132,17 @@
                 </div>
                 <div class="info-content">
                     <h3>Telepon</h3>
-                    <p class="clickable-phone" onclick="window.location.href='tel:6281218473429'">+62 812 1847 3429</p>
+                    @php
+                        $phone = $web->whatsapp ?? '081218473429';
+                        $wa_number = preg_replace('/^0/', '62', $phone);
+                        $wa_text = urlencode('Halo, saya ingin berkonsultasi mengenai layanan anda');
+                    @endphp
+
+                    <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank"
+                        class="clickable-phone">
+                        +{{ preg_replace('/^0/', '62 ', $phone) }}
+                    </a>
+
                 </div>
             </div>
 
@@ -133,7 +162,7 @@
                 </div>
                 <div class="info-content">
                     <h3>Alamat</h3>
-                    <p>Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan</p>
+                    <p>{{ $web->alamat ?? 'Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan' }}</p>
                 </div>
             </div>
         </div>
@@ -546,7 +575,7 @@
                         <div class="collapse-body">
                             {{ $layanan->keterangan }}
                             <br>
-                            <a href="https://wa.me/6281218473429?text=Halo, saya ingin berkonsultasi mengenai layanan {{ urlencode($layanan->judul) }}"
+                            <a href="https://wa.me/{{ $wa_number ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan {{ urlencode($layanan->judul) }}"
                                 target="_blank">
                                 Tanya Bang Bardik
                             </a>
@@ -664,44 +693,47 @@
 
             <!-- Testimonials -->
             <div class="testimonials" style="margin-top: 5rem;">
-    <h3 style="text-align: center; font-size: 1.5rem; margin-bottom: 2rem; color: var(--primary);">Apa Kata Klien Kami</h3>
+                <h3 style="text-align: center; font-size: 1.5rem; margin-bottom: 2rem; color: var(--primary);">Apa Kata
+                    Klien Kami</h3>
 
-    <!-- Swiper Container -->
-    <div class="swiper testimonial-swiper">
-        <div class="swiper-wrapper">
-            @foreach ($testis as $testi)
-                <div class="swiper-slide">
-                    <div class="testimonial-card"
-                        style="background-color: white; border-radius: 8px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;">
-                        <div class="quote-icon"
-                            style="position: absolute; top: 20px; right: 20px; color: rgba(202, 168, 104, 0.2); font-size: 3rem;">
-                            <i class="fas fa-quote-right"></i>
-                        </div>
-                        <div class="testimonial-content" style="margin-bottom: 1.5rem;">
-                            <p style="font-style: italic; color: #555; position: relative; z-index: 1;">
-                                "{{$testi->testi}}"
-                            </p>
-                        </div>
-                        <div class="testimonial-author" style="display: flex; align-items: center;">
-                            <img src="{{asset('landing_assets/images/others/default.jpg')}}" alt="Client"
-                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 1rem;">
-                            <div>
-                                <h4 style="margin: 0; color: var(--primary);">{{$testi->nama}}</h4>
-                                <p style="margin: 0; color: var(--secondary); font-size: 0.9rem;">{{$testi->asal}}</p>
+                <!-- Swiper Container -->
+                <div class="swiper testimonial-swiper">
+                    <div class="swiper-wrapper">
+                        @foreach ($testis as $testi)
+                            <div class="swiper-slide">
+                                <div class="testimonial-card"
+                                    style="background-color: white; border-radius: 8px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;">
+                                    <div class="quote-icon"
+                                        style="position: absolute; top: 20px; right: 20px; color: rgba(202, 168, 104, 0.2); font-size: 3rem;">
+                                        <i class="fas fa-quote-right"></i>
+                                    </div>
+                                    <div class="testimonial-content" style="margin-bottom: 1.5rem;">
+                                        <p style="font-style: italic; color: #555; position: relative; z-index: 1;">
+                                            "{{ $testi->testi }}"
+                                        </p>
+                                    </div>
+                                    <div class="testimonial-author" style="display: flex; align-items: center;">
+                                        <img src="{{ asset('landing_assets/images/others/default.jpg') }}"
+                                            alt="Client"
+                                            style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 1rem;">
+                                        <div>
+                                            <h4 style="margin: 0; color: var(--primary);">{{ $testi->nama }}</h4>
+                                            <p style="margin: 0; color: var(--secondary); font-size: 0.9rem;">
+                                                {{ $testi->asal }}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                </div>
-            @endforeach
-        </div>
 
-        <!-- Swiper Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <!-- Swiper Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
-</div>
+                    <!-- Swiper Navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <!-- Swiper Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
 
         </div>
     </section>
@@ -718,9 +750,12 @@
             <div class="mansory-gallery">
                 <div class="column">
                     @foreach ($galeris as $item)
-                        <div class="image-wrapper" style="position: relative; margin-bottom: 1.5rem;" data-keterangan="{{ $item->keterangan }}">
-                            <img style="cursor: pointer; width: 100%; display: block;" src="{{ asset('storage/'.$item->gambar) }}">
-                            <div style="
+                        <div class="image-wrapper" style="position: relative; margin-bottom: 1.5rem;"
+                            data-keterangan="{{ $item->keterangan }}">
+                            <img style="cursor: pointer; width: 100%; display: block;"
+                                src="{{ asset('storage/' . $item->gambar) }}">
+                            <div
+                                style="
                                 position: absolute;
                                 bottom: 20px;
                                 left: 0;
@@ -778,147 +813,65 @@
             <div class="lawyers-slider-container" style="position: relative; overflow: hidden; margin: 0 -15px;">
                 <div class="lawyers-slider" style="display: flex; transition: transform 0.5s ease; width: 100%;">
                     <!-- Lawyer cards (same as before) -->
-                    <!-- Lawyer 1 -->
-                    <div class="lawyer-card" style="flex: 0 0 100%; padding: 0 15px; box-sizing: border-box;">
-                        <div
-                            style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
-                            <div class="lawyer-image" style="height: 250px; overflow: hidden;">
-                                <img src="{{ asset('landing_assets/images/lawyers/sadrach.jpeg') }}"
-                                    alt="Sadrach Meilando Siagian, S.H"
-                                    style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    @foreach ($lawyers as $l)
+                        <div class="lawyer-card" style="flex: 0 0 100%; padding: 0 15px; box-sizing: border-box;">
+                            <div
+                                style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
+                                <div class="lawyer-image" style="height: 250px; overflow: hidden;">
+                                    <img src="{{ $l->profile->gambar ? asset('storage') . '/' . $l->profile->gambar : asset('own_assets/images/user.png') }}"
+                                        alt="{{ $l->name }}"
+                                        style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
 
-                            </div>
-                            <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
-                                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary);">Sadrach
-                                    Meilando Siagian, S.H</h3>
-                                <p
-                                    style="color: #555; margin-bottom: 1rem; height: 72px; overflow: hidden; font-size: 0.9rem;">
-                                    Sadrach telah secara aktif bekerja untuk urusan-urusan pertanahan dan perumahan
-                                    (real-estate), urusan-urusan perbankan, urusanurusan perusahaan, dan urusan-urusan
-                                    bisnis selama bertahun-tahun.
-                                </p>
-                                <div class="lawyer-social"
-                                    style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fab fa-linkedin"></i></a>
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fas fa-envelope"></i></a>
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fas fa-phone-alt"></i></a>
                                 </div>
-                                <a href="/sadrach" class="btn"
-                                    style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
-                                    Lihat Profil Lengkap
-                                </a>
+                                <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
+                                    @php
+                                        $cleanDetail = strip_tags($l->profile->detail);
+                                        $shortDetail = Str::limit($cleanDetail, 150);
+                                    @endphp
+
+                                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary);">
+                                        {{ $l->name }}</h3>
+                                    <p
+                                        style="color: #555; margin-bottom: 1rem; height: 72px; overflow: hidden; font-size: 0.9rem;">
+                                        {{ $shortDetail }}
+                                    </p>
+                                    <div class="lawyer-social"
+                                        style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
+                                        @if ($l->profile->instagram)
+                                            <a href="{{ $l->profile->instagram }}" target="_blank"
+                                                style="color: var(--primary); font-size: 1.1rem;"><i
+                                                    class="fab fa-instagram"></i></a>
+                                        @endif
+                                        @if ($l->profile->facebook)
+                                            <a href="{{ $l->profile->facebook }}" target="_blank"
+                                                style="color: var(--primary); font-size: 1.1rem;"><i
+                                                    class="fab fa-facebook"></i></a>
+                                        @endif
+                                        @if ($l->profile->email)
+                                            <a href="mailto:{{ $l->profile->email }}"
+                                                style="color: var(--primary); font-size: 1.1rem;"><i
+                                                    class="fas fa-envelope"></i></a>
+                                        @endif
+                                        @if ($l->profile->whatsapp)
+                                            @php
+                                                $wa = $l->profile->whatsapp ?? '08123456789';
+                                                $wa_number = preg_replace('/^0/', '62', $wa);
+                                            @endphp
+
+                                            <a href="https://wa.me/{{ $wa_number }}"
+                                                style="color: var(--primary); font-size: 1.1rem;" target="_blank">
+                                                <i class="fas fa-whatsapp"></i>
+                                            </a>
+                                        @endif
+                                    </div>
+                                    <a href="/profile/detail-lawyer?lawyer={{ $l->name }}" class="btn"
+                                        style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
+                                        Lihat Profil Lengkap
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Lawyer 2 -->
-                    <div class="lawyer-card" style="flex: 0 0 100%; padding: 0 15px; box-sizing: border-box;">
-                        <div
-                            style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
-                            <div class="lawyer-image" style="height: 250px; overflow: hidden;">
-                                <img src="{{ asset('landing_assets/images/lawyers/putra.jpeg') }}"
-                                    alt="Ardik Putra Pratama Sudibyo, S.H"
-                                    style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
-
-                            </div>
-                            <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
-                                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary);">Ardik
-                                    Putra
-                                    Pratama Sudibyo, S.H</h3>
-                                <p
-                                    style="color: #555; margin-bottom: 1rem; height: 72px; overflow: hidden; font-size: 0.9rem;">
-                                    Ardik memiliki pengalaman dan pengetahuan yang luas dalam membantu dan mewakili
-                                    Klien dalam menangani sengketa-sengketa yang kompleks dan bernilai tinggi di
-                                    Pengadilan.
-                                </p>
-                                <div class="lawyer-social"
-                                    style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fab fa-linkedin"></i></a>
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fas fa-envelope"></i></a>
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fas fa-phone-alt"></i></a>
-                                </div>
-                                <a href="/ardik" class="btn"
-                                    style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
-                                    Lihat Profil Lengkap
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Lawyer 3 -->
-                    <div class="lawyer-card" style="flex: 0 0 100%; padding: 0 15px; box-sizing: border-box;">
-                        <div
-                            style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
-                            <div class="lawyer-image" style="height: 250px; overflow: hidden;">
-                                <img src="{{ asset('landing_assets/images/lawyers/hosbal.jpeg') }}"
-                                    alt="Hosbal Maruli Sihombing, S.H"
-                                    style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
-                            </div>
-                            <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
-                                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary);">Hosbal
-                                    Maruli Sihombing, S.H</h3>
-                                <p
-                                    style="color: #555; margin-bottom: 1rem; height: 72px; overflow: hidden; font-size: 0.9rem;">
-                                    Berpengalaman lebih dari 8 (delapan) tahun, Hosbal juga banyak menangani klien asing
-                                    baik WNA maupun perusahaan asing. Reputasinya sangat tidak diragukan sebagai
-                                    seeorang advokat handal.
-                                </p>
-                                <div class="lawyer-social"
-                                    style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fab fa-linkedin"></i></a>
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fas fa-envelope"></i></a>
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fas fa-phone-alt"></i></a>
-                                </div>
-                                <a href="/hosbal" class="btn"
-                                    style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
-                                    Lihat Profil Lengkap
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Lawyer 4 -->
-                    <div class="lawyer-card" style="flex: 0 0 100%; padding: 0 15px; box-sizing: border-box;">
-                        <div
-                            style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
-                            <div class="lawyer-image" style="height: 250px; overflow: hidden;">
-                                <img src="{{ asset('landing_assets/images/lawyers/lamrida.jpeg') }}"
-                                    alt="Lamria Sirait, S.H"
-                                    style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
-                            </div>
-                            <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
-                                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary);">Lamria
-                                    Sirait, S.H</h3>
-                                <p
-                                    style="color: #555; margin-bottom: 1rem; height: 72px; overflow: hidden; font-size: 0.9rem;">
-                                    Menjalani profesinya sebagai Advokat sejak tahun 2017 dan memiliki keahlian di
-                                    bidang litigasi baik yang berkaitan dengan litigasi pidana maupun perdata.
-                                </p>
-                                <div class="lawyer-social"
-                                    style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fab fa-linkedin"></i></a>
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fas fa-envelope"></i></a>
-                                    <a href="#" style="color: var(--primary); font-size: 1.1rem;"><i
-                                            class="fas fa-phone-alt"></i></a>
-                                </div>
-                                <a href="lamria.html" class="btn"
-                                    style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
-                                    Lihat Profil Lengkap
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!-- Navigation arrows -->
@@ -944,11 +897,12 @@
                 </p>
             </div>
 
-            <div class="client-logos" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem;">
+            <div class="client-logos"
+                style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem;">
                 @foreach ($clients as $client)
                     <div class="client-logo"
                         style="flex: 0 0 auto; display: flex; justify-content: center; align-items: center;">
-                        <img src="{{ asset('storage') . '/' . $client->logo}}" alt="{{$client->logo}}"
+                        <img src="{{ asset('storage') . '/' . $client->logo }}" alt="{{ $client->logo }}"
                             style="max-width: 150px; max-height: 80px; object-fit: contain;">
                     </div>
                 @endforeach
@@ -978,64 +932,31 @@
             <!-- Activities Grid -->
             <div class="activities-grid">
 
-                <!-- Activity 1 -->
-                <div class="activity-card">
-                    <div class="activity-image">
-                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                            alt="Seminar Hukum">
-                    </div>
-                    <div class="activity-content">
-                        <div class="activity-meta">
-                            <span class="activity-date">15 Mei 2023</span>
-                            <span class="activity-category">Seminar</span>
+                @foreach ($aktifitas as $a)
+                    <div class="activity-card">
+                        <div class="activity-image">
+                            <img src="{{asset('storage') . '/' . $a->thumbnail}}"
+                                alt="{{$a->judul}}">
                         </div>
-                        <h3>Seminar Nasional Perkembangan Hukum Bisnis</h3>
-                        <p>Sebagai pembicara utama dalam seminar nasional yang membahas perkembangan terbaru hukum
-                            bisnis di Indonesia.</p>
-                        <a href="#" class="read-more">Lihat Selengkapnya <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- Activity 2 -->
-                <div class="activity-card">
-                    <div class="activity-image">
-                        <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                            alt="Pelatihan Hukum">
-                    </div>
-                    <div class="activity-content">
-                        <div class="activity-meta">
-                            <span class="activity-date">28 April 2023</span>
-                            <span class="activity-category">Pelatihan</span>
+                        <div class="activity-content">
+                            <div class="activity-meta">
+                                <span class="activity-date">{{ $item->created_at->format('d M Y') }}</span>
+                                <span class="activity-category">{{$a->kategori}}</span>
+                            </div>
+                            <h3>{{$a->judul}}</h3>
+                            <p>{!! Str::limit(strip_tags($a->deksripsi), 120) !!}</p>
+                            <a href="/aktifitas/detail?judul={{$a->judul}}" class="read-more">Lihat Selengkapnya <i
+                                    class="fas fa-arrow-right"></i></a>
                         </div>
-                        <h3>Pelatihan Hukum Ketenagakerjaan</h3>
-                        <p>Menyelenggarakan pelatihan hukum ketenagakerjaan bagi HRD perusahaan mitra kami.</p>
-                        <a href="#" class="read-more">Lihat Selengkapnya <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
-
-                <!-- Activity 3 -->
-                <div class="activity-card">
-                    <div class="activity-image">
-                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                            alt="Kegiatan Sosial">
-                    </div>
-                    <div class="activity-content">
-                        <div class="activity-meta">
-                            <span class="activity-date">10 April 2023</span>
-                            <span class="activity-category">Sosial</span>
-                        </div>
-                        <h3>Bantuan Hukum Gratis</h3>
-                        <p>Memberikan konsultasi hukum gratis kepada masyarakat di daerah terpencil.</p>
-                        <a href="#" class="read-more">Lihat Selengkapnya <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
 
             <!-- View All Button -->
-            <div class="view-all">
+            {{-- <div class="view-all">
                 <a href="#" class="btn">Lihat Semua Aktivitas <i class="fas fa-arrow-right"></i></a>
-            </div>
+            </div> --}}
         </div>
     </section>
 
@@ -1287,9 +1208,10 @@
         </div> --}}
     </footer>
 
-    <div id="floating-button" onclick="location.href = 'https://wa.me/6281218473429?text=Halo Bang Bardik, saya ingin berkonsultasi mengenai layanan HUKUM yang anda berikan'">
+    <div id="floating-button"
+        onclick="location.href = 'https://wa.me/6281218473429?text=Halo Bang Bardik, saya ingin berkonsultasi mengenai layanan HUKUM yang anda berikan'">
         <button id="close-btn">×</button>
-        <img src="{{asset('landing_assets/images/others/karakter.png')}}" alt="Floating" />
+        <img src="{{ asset('landing_assets/images/others/karakter.png') }}" alt="Floating" />
     </div>
 
     <script src="{{ asset('landing_assets/js/script.js') }}"></script>
@@ -1313,8 +1235,12 @@
                 prevEl: '.swiper-button-prev',
             },
             breakpoints: {
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                }
             }
         });
     </script>

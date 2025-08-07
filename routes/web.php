@@ -11,12 +11,14 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebModelController;
+use App\Models\Aktifitas;
 use App\Models\Banner;
 use App\Models\Client;
 use App\Models\Galeri;
 use App\Models\Layanan;
 use App\Models\Testimoni;
 use App\Models\User;
+use App\Models\WebModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,10 +39,14 @@ Route::get('/', function () {
         'testis' => Testimoni::all(),
         'galeris' => Galeri::latest()->take(8)->get(),
         'clients' => Client::all(),
-        'lawyers' => User::with('profile')->where('role', 'Lawyer')->get()
+        'aktifitas' => Aktifitas::all(),
+        'lawyers' => User::with('profile')->where('role', 'Lawyer')->get(),
+        'web' => WebModel::first()
     ];
     return view('welcome', $data);
 });
+
+Route::get('/profile/detail-lawyer', [UserController::class, 'detailLawyer']);
 
 Route::get('/galeri-kami', [GaleriController::class, 'getData']);
 
@@ -92,6 +98,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/aktifitas', [AktifitasController::class, 'index']);
     Route::post('/aktifitas/store', [AktifitasController::class, 'store']);
     Route::get('/aktifitas/edit', [AktifitasController::class, 'edit']);
+    Route::get('/aktifitas/detail', [AktifitasController::class, 'detail']);
     Route::post('/aktifitas/update', [AktifitasController::class, 'update']);
     Route::post('/aktifitas/delete', [AktifitasController::class, 'delete']);
 
@@ -108,6 +115,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/web-profile/update', [WebModelController::class, 'update']);
 
     Route::get('/profile', [UserController::class, 'profile']);
+    Route::get('/profile/edit-lawyer', [UserController::class, 'editLawyer']);
+    Route::post('/profile/update-lawyer', [UserController::class, 'updateLawyer']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

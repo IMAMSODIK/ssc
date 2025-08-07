@@ -1,5 +1,9 @@
 @extends('template')
 
+@section('own_style')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
+@endsection
+
 @section('content')
     <div class="page-body">
         <div class="container-fluid mt-4">
@@ -9,7 +13,7 @@
                         <h4>Lawyer Profile</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                        {{-- <button class="btn btn-success" id="tambah-data">Update Profile</button> --}}
+                        <button class="btn btn-success" id="update-data">Update Profile</button>
                     </div>
                 </div>
             </div>
@@ -25,7 +29,8 @@
                                 style="background-image: url('{{ asset('landing_assets/images/ctr old/image.jpeg') }}');">
                             </div>
                             <div class="user-image">
-                                <div class="avatar"><img alt="" src="{{ ($profile->profile?->gambar) ? asset('storage') . '/' . $profile->profile?->gambar : asset('landing_assets/logo/logo.png') }}">
+                                <div class="avatar"><img alt=""
+                                        src="{{ $profile->profile?->gambar ? asset('storage') . '/' . $profile->profile?->gambar : asset('landing_assets/logo/logo.png') }}">
                                 </div>
                             </div>
                             <div class="info">
@@ -34,13 +39,15 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="ttl-info text-start">
-                                                    <h6 style="margin-bottom: 10px"><i class="fa fa-envelope"></i>   Email</h6>
+                                                    <h6 style="margin-bottom: 10px"><i class="fa fa-envelope"></i>   Email
+                                                    </h6>
                                                     <span>{{ $profile->profile?->email ?? '' }}</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="ttl-info text-start">
-                                                    <h6 style="margin-bottom: 10px"><i class="fa fa-facebook"></i>Facebook</h6>
+                                                    <h6 style="margin-bottom: 10px"><i class="fa fa-facebook"></i>Facebook
+                                                    </h6>
                                                     <span>{{ $profile->profile?->facebook ?? '' }}</span>
                                                 </div>
                                             </div>
@@ -58,17 +65,20 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="ttl-info text-start">
-                                                    <h6 style="margin-bottom: 10px"><i class="fa fa-instagram"></i>Instagram</h6>
+                                                    <h6 style="margin-bottom: 10px"><i class="fa fa-instagram"></i>Instagram
+                                                    </h6>
                                                     <span>
                                                         @if ($profile->profile?->instagram)
-                                                            <a href="{{$profile->profile?->instagram}}" class="btn btn-success" target="_blank">Instagram</a>
+                                                            <a href="{{ $profile->profile?->instagram }}"
+                                                                class="btn btn-success" target="_blank">Instagram</a>
                                                         @endif
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="ttl-info text-start">
-                                                    <h6 style="margin-bottom: 10px"><i class="fa fa-whatsapp"></i> Whatsapp</h6>
+                                                    <h6 style="margin-bottom: 10px"><i class="fa fa-whatsapp"></i> Whatsapp
+                                                    </h6>
                                                     <span>{{ $profile->profile?->whatsapp ?? '' }}</span>
                                                 </div>
                                             </div>
@@ -98,7 +108,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Update Profil Web</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Update Profil Lawyer</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
@@ -118,7 +128,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="nama">Nama Perusahaan</label>
+                                            <label class="form-label" for="nama">Nama Lawyer</label>
                                             <input type="text" class="form-control input-air-primary" id="nama"
                                                 placeholder="Masukkan Nama Perusahaan" required>
                                         </div>
@@ -127,41 +137,42 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="jargon">Jargon Perusahaan</label>
-                                            <textarea class="form-control input-air-primary" id="jargon" placeholder="Masukkan Jargon Perusahaan" cols="30"
+                                            <label class="form-label" for="detail">Detail Lawyer</label>
+                                            <textarea name="detail" id="detail" class="form-control summernote"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="instagram">Instagram</label>
+                                            <textarea class="form-control input-air-primary" id="instagram" placeholder="Masukkan instagram" cols="30"
                                                 rows="5"></textarea>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="alamat">Alamat Perusahaan</label>
-                                            <textarea class="form-control input-air-primary" id="alamat" placeholder="Masukkan Alamat Perusahaan"
-                                                cols="30" rows="5"></textarea>
+                                            <label class="form-label" for="facebook">Facebook</label>
+                                            <textarea class="form-control input-air-primary" id="facebook" placeholder="Masukkan Facebook" cols="30"
+                                                rows="5"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="whatsapp">Whatsapp perusahaan</label>
+                                            <label class="form-label" for="whatsapp">Whatsapp</label>
                                             <input type="text" class="form-control input-air-primary" id="whatsapp"
-                                                placeholder="Masukkan Whatsapp perusahaan" required>
+                                                placeholder="Masukkan Whatsapp" required>
                                         </div>
                                     </div>
 
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="instagram">Insagram perusahaan</label>
-                                            <input type="text" class="form-control input-air-primary" id="instagram"
-                                                placeholder="Masukkan Insagram perusahaan" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="email">Email perusahaan</label>
+                                            <label class="form-label" for="email">Email</label>
                                             <input type="text" class="form-control input-air-primary" id="email"
-                                                placeholder="Masukkan Email perusahaan" required>
+                                                placeholder="Masukkan Email" required>
                                         </div>
                                     </div>
                                 </div>
@@ -226,4 +237,5 @@
 
 @section('own_script')
     <script src="{{ asset('own_assets/scripts/profil_user.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
 @endsection
