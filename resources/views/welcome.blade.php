@@ -850,7 +850,7 @@
                                         @if ($l->profile->email)
                                             <a href="mailto:{{ $l->profile->email }}"
                                                 style="color: var(--primary); font-size: 1.1rem;"><i
-                                                    class="fas fa-envelope"></i></a>
+                                                    class="fas fa-envelope"></i><i class="fas fa-whatsapp"></i></a>
                                         @endif
                                         @if ($l->profile->whatsapp)
                                             @php
