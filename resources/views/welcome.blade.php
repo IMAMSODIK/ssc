@@ -1095,7 +1095,7 @@
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         @foreach ($layanans as $l)
                             <li style="margin-bottom: 0.8rem;">
-                                <a href="#services-section"
+                                <a href="#service"
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                     <i class="fas fa-chevron-right"
                                         style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
