@@ -835,7 +835,7 @@
                     style="background-color: var(--secondary); color: var(--primary); padding: 1rem 2rem; font-weight: 600; border-radius: 4px; text-decoration: none; transition: all 0.3s ease;">
                     <i class="fas fa-phone-alt" style="margin-right: 0.5rem;"></i> Hubungi Kami
                 </a> --}}
-                <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank" class="btn"
+                <a href="https://wa.me/{{ $web->whatsapp }}?text=text=Halo, saya ingin berkonsultasi mengenai layanan anda" target="_blank" class="btn"
                     style="background-color: transparent; color: white; padding: 1rem 2rem; font-weight: 600; border-radius: 4px; text-decoration: none; border: 2px solid var(--secondary); transition: all 0.3s ease;">
                     <i class="fas fa-phone-alt" style="margin-right: 0.5rem;"></i> Hubungi Kami
                 </a>
@@ -983,7 +983,7 @@
                                 <i class="fas fa-phone-alt"></i>
                             </div>
                             <div>
-                                <a href="https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan {{ urlencode($layanan->judul) }}"
+                                <a href="https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan anda }}"
                                 target="_blank"
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
                                     {{ $web->whatsapp ?? '081218473429' }}
