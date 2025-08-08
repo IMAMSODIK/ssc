@@ -18,7 +18,7 @@
             <div class="logo">
                 <img src="{{ asset('landing_assets/logo/logo.png') }}" alt="LawFirm Logo">
                 <div class="logo-text">
-                    <h3>SIAGIAN SUDIBYO & CO</h3>
+                    <h3>{{ $web->nama_perusahaan ?? 'SIAGIAN SUDIBYO & CO' }}</h3>
                     <p>Lawyer & Law Firm</p>
                 </div>
             </div>
@@ -30,8 +30,16 @@
                     </div>
                     <div class="info-content">
                         <h3>Telepon</h3>
-                        <p class="clickable-phone" onclick="window.location.href='tel:6281218473429'">+62 812 1847 3429
-                        </p>
+                        @php
+                            $wa = $web->whatsapp ?? '081218473429';
+                            $wa_number = preg_replace('/^0/', '62', $wa);
+                            $wa_text = urlencode('Halo, saya ingin berkonsultasi mengenai layanan anda');
+                        @endphp
+
+                        <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank"
+                            class="" style="text-decoration: none; color: inherit;">
+                            {{ $wa }}
+                        </a>
                     </div>
                 </div>
 
@@ -41,7 +49,7 @@
                     </div>
                     <div class="info-content">
                         <h3>Alamat</h3>
-                        <p>Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan</p>
+                        <p>{{ $web->alamat ?? 'Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan' }}</p>
                     </div>
                 </div>
             </div>
@@ -57,16 +65,21 @@
     <nav class="main-nav" id="mainNav">
         <div class="nav-container">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#service">Services</a></li>
-                <li><a href="gallery.html" class="active">Gallery</a></li>
-                <li><a href="#attonery">Attorneys</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#service">Services</a></li>
+                <li><a href="#" class="active">Gallery</a></li>
+                <li><a href="/#attonery">Attorneys</a></li>
+                <li><a href="/#contact">Contact</a></li>
             </ul>
-            <a href="#" class="contact-btn" onclick="window.location.href='tel:6281218473429'">
-                <i class="fas fa-phone-alt"></i>
-                Hubungi Sekarang
+            @php
+                $wa = $web->whatsapp ?? '081218473429';
+                $wa_number = preg_replace('/^0/', '62', $wa);
+                $wa_text = urlencode('Halo, saya ingin berkonsultasi mengenai layanan anda');
+            @endphp
+
+            <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank" class="contact-btn">
+                Hubungi via WhatsApp
             </a>
         </div>
     </nav>
@@ -76,7 +89,7 @@
         <div class="logo" style="margin-bottom: 50px; margin-left: 30px">
             <img src="{{ asset('landing_assets/logo/logo.png') }}" alt="LawFirm Logo">
             <div class="logo-text">
-                <h3>SIAGIAN SUDIBYO & CO</h3>
+                <h3>{{ $web->nama_perusahaan ?? 'SIAGIAN SUDIBYO & CO' }}</h3>
                 <p>Lawyer & Law Firm</p>
             </div>
         </div>
@@ -97,7 +110,16 @@
                 </div>
                 <div class="info-content">
                     <h3>Telepon</h3>
-                    <p class="clickable-phone" onclick="window.location.href='tel:6281218473429'">+62 812 1847 3429</p>
+                    @php
+                        $phone = $web->whatsapp ?? '081218473429';
+                        $wa_number = preg_replace('/^0/', '62', $phone);
+                        $wa_text = urlencode('Halo, saya ingin berkonsultasi mengenai layanan anda');
+                    @endphp
+
+                    <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank"
+                        class="clickable-phone">
+                        +{{ preg_replace('/^0/', '62 ', $phone) }}
+                    </a>
                 </div>
             </div>
 
@@ -117,13 +139,12 @@
                 </div>
                 <div class="info-content">
                     <h3>Alamat</h3>
-                    <p>Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan</p>
+                    <p>{{ $web->alamat ?? 'Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan' }}</p>
                 </div>
             </div>
         </div>
 
-        <a href="#" class="sidebar-contact-btn" style="margin-left: 20px; margin-right: 20px;"
-            onclick="window.location.href='tel:6281218473429'">
+        <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" class="sidebar-contact-btn" style="margin-left: 20px; margin-right: 20px;" target="_blank">
             <i class="fas fa-phone-alt"></i> Hubungi Sekarang
         </a>
 
@@ -691,7 +712,7 @@
             <i class="fas fa-arrow-up"></i>
         </div>
     </footer>
-    <script src="{{asset('landing_assets/js/galeri.js')}}"></script>
+    <script src="{{ asset('landing_assets/js/galeri.js') }}"></script>
 </body>
 
 </html>

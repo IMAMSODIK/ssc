@@ -167,8 +167,7 @@
             </div>
         </div>
 
-        <a href="#" class="sidebar-contact-btn" style="margin-left: 20px; margin-right: 20px;"
-            onclick="window.location.href='tel:6281218473429'">
+        <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" class="sidebar-contact-btn" target="_blank" style="margin-left: 20px; margin-right: 20px;">
             <i class="fas fa-phone-alt"></i> Hubungi Sekarang
         </a>
 

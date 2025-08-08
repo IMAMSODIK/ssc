@@ -6,6 +6,8 @@ use App\Models\Galeri;
 use App\Http\Requests\StoreGaleriRequest;
 use App\Http\Requests\UpdateGaleriRequest;
 use App\Models\Banner;
+use App\Models\Layanan;
+use App\Models\WebModel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +26,11 @@ class GaleriController extends Controller
     public function getData()
     {
         $data = [
+            'layanans' => Layanan::all(),
             'pageTitle' => "Galeri",
             'galeris' => Galeri::all(),
             'banners' => Banner::all(),
+            'web' => WebModel::first()
         ];
         return view('galeri.index_user', $data);
     }
