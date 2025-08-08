@@ -102,9 +102,3 @@ admin@siagiansudibyo
 
 
 
-
-tambahkan redirect 404
-tambahkakn 404 ke halaman detai lawyer
-tambahkan fitur stared pada aktifitas
-tambahkan fitur stared pada galeri
-lihat semua aktifitas
