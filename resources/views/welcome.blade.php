@@ -999,10 +999,18 @@
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
                                     lawyer@siagiansudibyoandcolawfirm.com
                                 </a>
+                                
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center;">
+                            <div style="color: var(--secondary); margin-right: 1rem; font-size: 1.2rem;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
                                 <a href="mailto:admin@siagiansudibyoandcolawfirm.com"
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
                                     admin@siagiansudibyoandcolawfirm.com
-                                </a>
+                                </a>   
                             </div>
                         </li>
                         <li style="display: flex; align-items: center;">
