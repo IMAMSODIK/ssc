@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
+use App\Models\Layanan;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\WebModel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -207,7 +210,10 @@ class UserController extends Controller
             $profile = User::with('profile')->where('name', $r->lawyer)->first();
             $data = [
                 'pageTitle' => "Detai Lawyer",
-                'profile' => $profile
+                'profile' => $profile,
+                'layanans' => Layanan::all(),
+                'banners' => Banner::all(),
+                'web' => WebModel::first()
             ];
 
             if ($profile) {
