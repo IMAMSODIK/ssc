@@ -315,7 +315,7 @@
                             style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="mailto:{{ $web->email }}" target="_blank"
+                        <a href="mailto:{{ $web->email ?? 'mailto:lawyer@siagiansudibyoandcolawfirm.com' }}" target="_blank"
                             style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                             <i class="fas fa-envelope"></i>
                         </a>
@@ -395,7 +395,7 @@
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         @foreach ($layanans as $l)
                             <li style="margin-bottom: 0.8rem;">
-                                <a href="#service"
+                                <a href="/#service"
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                     <i class="fas fa-chevron-right"
                                         style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
@@ -445,6 +445,13 @@
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
                                     lawyer@siagiansudibyoandcolawfirm.com
                                 </a>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center;">
+                            <div style="color: var(--secondary); margin-right: 1rem; font-size: 1.2rem;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
                                 <a href="mailto:admin@siagiansudibyoandcolawfirm.com"
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
                                     admin@siagiansudibyoandcolawfirm.com
