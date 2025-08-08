@@ -949,7 +949,7 @@
             <div class="logo">
                 <img src="{{asset('landing_assets/logo/logo.png')}}" alt="LawFirm Logo">
                 <div class="logo-text">
-                    <h3>SIAGIAN SUDIBYO & CO</h3>
+                    <h3>{{ $web->nama_perusahaan ?? 'SIAGIAN SUDIBYO & CO' }}</h3>
                     <p>Lawyer & Law Firm</p>
                 </div>
             </div>
@@ -961,8 +961,16 @@
                     </div>
                     <div class="info-content">
                         <h3>Telepon</h3>
-                        <p class="clickable-phone" onclick="window.location.href='tel:6281218473429'">+62 812 1847 3429
-                        </p>
+                        @php
+                            $wa = $web->whatsapp ?? '081218473429';
+                            $wa_number = preg_replace('/^0/', '62', $wa);
+                            $wa_text = urlencode('Halo, saya ingin berkonsultasi mengenai layanan anda');
+                        @endphp
+
+                        <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank"
+                            class="" style="text-decoration: none; color: inherit;">
+                            {{ $wa }}
+                        </a>
                     </div>
                 </div>
 
@@ -983,7 +991,7 @@
                     </div>
                     <div class="info-content">
                         <h3>Alamat</h3>
-                        <p>Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan</p>
+                        <p>{{ $web->alamat ?? 'Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan' }}</p>
                     </div>
                 </div>
             </div>
@@ -999,16 +1007,21 @@
     <nav class="main-nav" id="mainNav">
         <div class="nav-container">
             <ul>
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#service">Services</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#attonery">Attorneys</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#service">Services</a></li>
+                <li><a href="/#gallery">Gallery</a></li>
+                <li><a href="/#attonery">Attorneys</a></li>
+                <li><a href="/#contact">Contact</a></li>
             </ul>
-            <a href="#" class="contact-btn">
-                <i class="fas fa-phone-alt"></i>
-                Hubungi Sekarang
+            @php
+                $wa = $web->whatsapp ?? '081218473429';
+                $wa_number = preg_replace('/^0/', '62', $wa);
+                $wa_text = urlencode('Halo, saya ingin berkonsultasi mengenai layanan anda');
+            @endphp
+
+            <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank" class="contact-btn">
+                Hubungi via WhatsApp
             </a>
         </div>
     </nav>
@@ -1018,18 +1031,18 @@
         <div class="logo" style="margin-bottom: 50px; margin-left: 30px">
             <img src="{{asset('landing_assets/logo/logo.png')}}" alt="LawFirm Logo">
             <div class="logo-text">
-                <h3>SIAGIAN SUDIBYO & CO</h3>
+                <h3>{{ $web->nama_perusahaan ?? 'SIAGIAN SUDIBYO & CO' }}</h3>
                 <p>Lawyer & Law Firm</p>
             </div>
         </div>
 
         <ul style="margin-left: 20px; margin-right: 20px;">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#service">Services</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#attonery">Attorneys</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#service">Services</a></li>
+            <li><a href="/#gallery">Gallery</a></li>
+            <li><a href="/#attonery">Attorneys</a></li>
+            <li><a href="/#contact">Contact</a></li>
         </ul>
 
         <div class="sidebar-contact-info" style="margin-left: 20px; margin-right: 20px;">
@@ -1039,7 +1052,16 @@
                 </div>
                 <div class="info-content">
                     <h3>Telepon</h3>
-                    <p class="clickable-phone" onclick="window.location.href='tel:6281218473429'">+62 812 1847 3429</p>
+                    @php
+                        $phone = $web->whatsapp ?? '081218473429';
+                        $wa_number = preg_replace('/^0/', '62', $phone);
+                        $wa_text = urlencode('Halo, saya ingin berkonsultasi mengenai layanan anda');
+                    @endphp
+
+                    <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" target="_blank"
+                        class="clickable-phone">
+                        +{{ preg_replace('/^0/', '62 ', $phone) }}
+                    </a>
                 </div>
             </div>
 
@@ -1059,216 +1081,61 @@
                 </div>
                 <div class="info-content">
                     <h3>Alamat</h3>
-                    <p>Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan</p>
+                    <p>{{ $web->alamat ?? 'Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan' }}</p>
                 </div>
             </div>
         </div>
 
-        <a href="#" class="sidebar-contact-btn" style="margin-left: 20px; margin-right: 20px;">
+        <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" class="sidebar-contact-btn" target="_blank" style="margin-left: 20px; margin-right: 20px;">
             <i class="fas fa-phone-alt"></i> Hubungi Sekarang
         </a>
 
         <!-- Mobile Footer Section -->
-        <div class="sidebar-footer mobile-only" style="
-        padding: 1.5rem 20px;
-        background-color: rgba(0,0,0,0.2);
-        margin-top: auto;
-        border-top: 1px solid rgba(255,255,255,0.1);
-    ">
-            <ul style="list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 1rem;">
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Hukum Perdata
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Hukum Pidana
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Hukum Keluarga
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Hukum Pertanahan
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Hukum Perbankan
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Hukum Ketenagakerjaan
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Litigasi
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Hukum Perusahaan
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Hukum Keimigrasian
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Dokumen Perjalanan
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Pengurusan KITAS
-                    </a>
-                </li>
-                <li style="margin-bottom: 0.6rem;">
-                    <a href="#"
-                        style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
-                        <i class="fas fa-chevron-right"
-                            style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
-                        Tindak Pidana Keimigrasian
-                    </a>
-                </li>
-            </ul>
+        <div class="sidebar-footer mobile-only" style="padding: 1.5rem 20px; background-color: rgba(0,0,0,0.2); margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
+            <!-- Layanan Kami Section -->
+            <div class="footer-services" style="margin-bottom: 1.5rem;">
+                <h4 style="color: white; margin-bottom: 0.8rem; font-size: 1rem; position: relative; padding-bottom: 5px;">
+                    Layanan Kami
+                    <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background-color: var(--secondary);"></span>
+                </h4>
+                <ul style="list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 1rem;">
+                    @foreach ($layanans as $index => $layanan)
+                        <li style="margin-bottom: 0.6rem;">
+                            <a href="https://wa.me/{{ $wa_number ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan {{ urlencode($layanan->judul) }}" target="_blank" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
+                                <i class="fas fa-chevron-right"
+                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
+                                {{ strtoupper($layanan->judul) }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
 
             <!-- Social Media & Copyright -->
-            <div class="footer-bottom" style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 1.5rem;
-        ">
-                <div class="social-links" style="
-                display: flex;
-                gap: 1rem;
-                margin-bottom: 1rem;
-            ">
-                    <a href="#" style="
-                    text-decoration: none;
-                    color: white;
-                    background-color: rgba(255,255,255,0.1);
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: all 0.3s ease;
-                ">
-                        <i class="fab fa-facebook-f"></i>
+            <div class="footer-bottom" style="display: flex; flex-direction: column; align-items: center; margin-top: 1.5rem;">
+                
+                <div class="social-links" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <a href="https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan anda }}" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                        <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="#" style="
-                    text-decoration: none;
-                    color: white;
-                    background-color: rgba(255,255,255,0.1);
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: all 0.3s ease;
-                ">
-                        <i class="fab fa-linkedin-in"></i>
+                    <a href="mailto:{{ $web->email }}" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                        <i class="fas fa-envelope"></i>
                     </a>
-                    <a href="#" style="
-                    text-decoration: none;
-                    color: white;
-                    background-color: rgba(255,255,255,0.1);
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: all 0.3s ease;
-                ">
+                    <a href="{{$web->instagram}}" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                         <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" style="
-                    text-decoration: none;
-                    color: white;
-                    background-color: rgba(255,255,255,0.1);
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: all 0.3s ease;
-                ">
-                        <i class="fab fa-youtube"></i>
                     </a>
                 </div>
 
-                <p style="
-                color: rgba(255,255,255,0.7);
-                font-size: 0.8rem;
-                margin-bottom: 0.8rem;
-                text-align: center;
-            ">
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem; margin-bottom: 0.8rem; text-align: center;">
                     &copy; 2025 Siagian Sudibyo & Co. All Rights Reserved.
                 </p>
 
-                <div class="footer-links" style="
-                display: flex;
-                gap: 1rem;
-                font-size: 0.75rem;
-            ">
-                    <a href="#" style="
-                    color: rgba(255,255,255,0.7);
-                    text-decoration: none;
-                ">
+                <div class="footer-links" style="display: flex; gap: 1rem; font-size: 0.75rem;">
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">
                         Kebijakan Privasi
                     </a>
                     <span style="color: var(--secondary);">•</span>
-                    <a href="#" style="
-                    color: rgba(255,255,255,0.7);
-                    text-decoration: none;
-                ">
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">
                         Syarat & Ketentuan
                     </a>
                 </div>
@@ -1293,28 +1160,17 @@
             </div>
         </div>
 
-        <!-- Slide 2 -->
-        <div class="slide" style="background-image: url('{{asset('landing_assets/images/ctr old/image2.jpeg')}}');">
-            <div class="container">
-                <div class="slide-content">
-                    <h2>Tim Pengacara Berpengalaman</h2>
-                    <p>Dengan lebih dari 15 tahun pengalaman, kami siap mendampingi Anda dalam berbagai masalah hukum.
-                    </p>
-                    <a href="#" class="btn">Lihat Profil Pengacara</a>
+        @foreach ($banners as $banner)
+            <div class="slide" style="background-image: url('{{ asset('storage') . '/' . $banner->gambar }}');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h2>{{ $banner->heading_1 }}</h2>
+                        <p>{{ $banner->heading_2 }}</p>
+                        <a href="{{ $banner->link_tombol }}" class="btn">{{ $banner->text_tombol }}</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="slide" style="background-image: url('{{asset('landing_assets/images/ctr old/image3.jpeg')}}');">
-            <div class="container">
-                <div class="slide-content">
-                    <h2>Konsultasi Hukum Gratis</h2>
-                    <p>Manfaatkan konsultasi hukum pertama gratis dengan pengacara spesialis kami.</p>
-                    <a href="#" class="btn">Jadwalkan Konsultasi</a>
-                </div>
-            </div>
-        </div>
+        @endforeach
 
         <!-- Slider Navigation Dots -->
         <div class="slider-nav">
@@ -1397,7 +1253,8 @@
                 <!-- Footer Column 1 - About -->
                 <div class="footer-col">
                     <div class="footer-logo" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <img src="{{asset('landing_assets/logo/logo.png')}}" alt="LawFirm Logo" style="height: 50px; margin-right: 10px;">
+                        <img src="{{ asset('landing_assets/logo/logo.png') }}" alt="LawFirm Logo"
+                            style="height: 50px; margin-right: 10px;">
                         <div>
                             <h3 style="color: white; margin: 0; font-size: 1.3rem;">SIAGIAN SUDIBYO & CO</h3>
                             <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.9rem;">Lawyer & Law Firm
@@ -1409,21 +1266,17 @@
                         internasional.
                     </p>
                     <div class="footer-social" style="display: flex; gap: 1rem;">
-                        <a href="#"
+                        <a href="https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan anda }}"
                             style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
-                            <i class="fab fa-facebook-f"></i>
+                            <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="#"
+                        <a href="mailto:{{ $web->email ?? 'mailto:lawyer@siagiansudibyoandcolawfirm.com' }}" target="_blank"
                             style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
-                            <i class="fab fa-linkedin-in"></i>
+                            <i class="fas fa-envelope"></i>
                         </a>
-                        <a href="#"
+                        <a href="{{$web->instagram}}" target="_blank"
                             style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                             <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#"
-                            style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
-                            <i class="fab fa-youtube"></i>
                         </a>
                     </div>
                 </div>
@@ -1437,7 +1290,7 @@
                     </h3>
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
+                            <a href="/"
                                 style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                 <i class="fas fa-chevron-right"
                                     style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
@@ -1445,7 +1298,7 @@
                             </a>
                         </li>
                         <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
+                            <a href="/#about"
                                 style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                 <i class="fas fa-chevron-right"
                                     style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
@@ -1453,7 +1306,7 @@
                             </a>
                         </li>
                         <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
+                            <a href="/#service"
                                 style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                 <i class="fas fa-chevron-right"
                                     style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
@@ -1461,7 +1314,15 @@
                             </a>
                         </li>
                         <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
+                            <a href="#about"
+                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                <i class="fas fa-chevron-right"
+                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
+                                Galeri
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 0.8rem;">
+                            <a href="/#attonery"
                                 style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                 <i class="fas fa-chevron-right"
                                     style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
@@ -1469,7 +1330,7 @@
                             </a>
                         </li>
                         <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
+                            <a href="/#contact"
                                 style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                 <i class="fas fa-chevron-right"
                                     style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
@@ -1487,46 +1348,16 @@
                             style="position: absolute; bottom: 0; left: 0; width: 50px; height: 2px; background-color: var(--secondary);"></span>
                     </h3>
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Advokasi & Litigasi
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Hukum Bisnis & Korporasi
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Hukum Ketenagakerjaan
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Hukum Kekayaan Intelektual
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <a href="#"
-                                style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right"
-                                    style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                Hukum Keluarga & Waris
-                            </a>
-                        </li>
+                        @foreach ($layanans as $l)
+                            <li style="margin-bottom: 0.8rem;">
+                                <a href="/#service"
+                                    style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                    <i class="fas fa-chevron-right"
+                                        style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
+                                    {{$l->judul}}
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
 
@@ -1544,7 +1375,7 @@
                             </div>
                             <div>
                                 <p style="margin: 0; color: rgba(255,255,255,0.8); line-height: 1.5;">
-                                    Gedung Blok M Square Lantai 6 JI Melawai 5, Jakarta Selatan
+                                    {{$web->alamat}}
                                 </p>
                             </div>
                         </li>
@@ -1553,9 +1384,10 @@
                                 <i class="fas fa-phone-alt"></i>
                             </div>
                             <div>
-                                <a href="tel:6281218473429"
+                                <a href="https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan {{ urlencode($layanan->judul) }}"
+                                target="_blank"
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
-                                    +62 812 1847 3429
+                                    {{ $web->whatsapp ?? '081218473429' }}
                                 </a>
                             </div>
                         </li>
@@ -1564,9 +1396,20 @@
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
-                                <a href="mailto:info@siagiansudibyo.com"
+                                <a href="mailto:lawyer@siagiansudibyoandcolawfirm.com"
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
-                                    info@siagiansudibyo.com
+                                    lawyer@siagiansudibyoandcolawfirm.com
+                                </a>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center;">
+                            <div style="color: var(--secondary); margin-right: 1rem; font-size: 1.2rem;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <a href="mailto:admin@siagiansudibyoandcolawfirm.com"
+                                    style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
+                                    admin@siagiansudibyoandcolawfirm.com
                                 </a>
                             </div>
                         </li>
@@ -1590,15 +1433,15 @@
         <div class="footer-bottom" style="background-color: rgba(0,0,0,0.2); padding: 1.5rem 0; text-align: center;">
             <div class="container">
                 <p style="margin: 0; color: rgba(255,255,255,0.7); font-size: 0.9rem;">
-                    &copy; 2023 Siagian Sudibyo & Co. All Rights Reserved.
-                    <span style="color: var(--secondary);">|</span>
+                    &copy; 2025 Siagian Sudibyo & Co. All Rights Reserved.
+                    {{-- <span style="color: var(--secondary);">|</span>
                     <a href="#"
                         style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease;">Kebijakan
                         Privasi</a>
                     <span style="color: var(--secondary);">|</span>
                     <a href="#"
                         style="color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease;">Syarat
-                        & Ketentuan</a>
+                        & Ketentuan</a> --}}
                 </p>
             </div>
         </div>
