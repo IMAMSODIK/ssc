@@ -869,7 +869,10 @@
                             style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="mailto:{{ $web->email ?? 'mailto:lawyer@siagiansudibyoandcolawfirm.com'}}" target="_blank"
+                        @php
+                            $mail = $web->email ?? 'lawyer@siagiansudibyoandcolawfirm.com';
+                        @endphp
+                        <a href="mailto:{{$mail}}" target="_blank"
                             style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                             <i class="fas fa-envelope"></i>
                         </a>

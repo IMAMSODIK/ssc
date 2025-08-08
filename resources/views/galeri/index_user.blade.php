@@ -149,33 +149,12 @@
         </a>
 
         <!-- Mobile Footer Section -->
-        <div class="sidebar-footer mobile-only"
-            style="
-        padding: 1.5rem 20px;
-        background-color: rgba(0,0,0,0.2);
-        margin-top: auto;
-        border-top: 1px solid rgba(255,255,255,0.1);
-    ">
+        <div class="sidebar-footer mobile-only" style="padding: 1.5rem 20px; background-color: rgba(0,0,0,0.2); margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
             <!-- Layanan Kami Section -->
             <div class="footer-services" style="margin-bottom: 1.5rem;">
-                <h4
-                    style="
-                color: white;
-                margin-bottom: 0.8rem;
-                font-size: 1rem;
-                position: relative;
-                padding-bottom: 5px;
-            ">
+                <h4 style="color: white; margin-bottom: 0.8rem; font-size: 1rem; position: relative; padding-bottom: 5px;">
                     Layanan Kami
-                    <span
-                        style="
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 40px;
-                    height: 2px;
-                    background-color: var(--secondary);
-                "></span>
+                    <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background-color: var(--secondary);"></span>
                 </h4>
                 <ul style="list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 1rem;">
                     @foreach ($layanans as $index => $layanan)
@@ -197,7 +176,10 @@
                     <a href="https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan anda }}" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="mailto:{{ $web->email }}" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                    @php
+                        $mail = $web->email ?? 'lawyer@siagiansudibyoandcolawfirm.com';
+                    @endphp
+                    <a href="mailto:{{$mail}}" target="_blank" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                         <i class="fas fa-envelope"></i>
                     </a>
                     <a href="{{$web->instagram}}" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
