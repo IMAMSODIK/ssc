@@ -167,7 +167,8 @@
             </div>
         </div>
 
-        <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" class="sidebar-contact-btn" target="_blank" style="margin-left: 20px; margin-right: 20px;">
+        <a href="https://wa.me/{{ $wa_number }}?text={{ $wa_text }}" class="sidebar-contact-btn"
+            target="_blank" style="margin-left: 20px; margin-right: 20px;">
             <i class="fas fa-phone-alt"></i> Hubungi Sekarang
         </a>
 
@@ -185,7 +186,9 @@
                 <ul style="list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 1rem;">
                     @foreach ($layanans as $index => $layanan)
                         <li style="margin-bottom: 0.6rem;">
-                            <a href="https://wa.me/{{ $wa_number ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan {{ urlencode($layanan->judul) }}" target="_blank" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
+                            <a href="https://wa.me/{{ $wa_number ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan {{ urlencode($layanan->judul) }}"
+                                target="_blank"
+                                style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center;">
                                 <i class="fas fa-chevron-right"
                                     style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.7rem;"></i>
                                 {{ strtoupper($layanan->judul) }}
@@ -202,15 +205,18 @@
             flex-direction: column;
             align-items: center;
             margin-top: 1.5rem;
-        ">  
+        ">
                 <div class="social-links" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                    <a href="https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan anda }}" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                    <a href="https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan anda }}"
+                        style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="mailto:{{ $web->email }}" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                    <a href="mailto:{{ $web->email }}"
+                        style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                         <i class="fas fa-envelope"></i>
                     </a>
-                    <a href="{{$web->instagram}}" style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                    <a href="{{ $web->instagram }}"
+                        style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div>
@@ -669,55 +675,56 @@
                                 style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
                                 <div class="lawyer-image" style="height: 250px; overflow: hidden;">
                                     <img src="{{ $l->profile->gambar ? asset('storage') . '/' . $l->profile->gambar : asset('own_assets/images/user.png') }}"
-                                        alt="{{ (explode(' ', $l->name)[0] === 'Sadrach') ? 'Ando' : explode(' ', $l->name)[0] }}"
+                                        alt="{{ explode(' ', $l->name)[0] === 'Sadrach' ? 'Ando' : explode(' ', $l->name)[0] }}"
                                         style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
 
                                 </div>
                                 <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
                                     @php
-                                        $cleanDetail = strip_tags($l->profile->detail);
-                                        $shortDetail = Str::limit($cleanDetail, 150);
+                                        $cleanDetail = strip_tags($l->profile->detail); // hapus tag HTML
+                                        $cleanDetail = str_replace('&nbsp;', ' ', $cleanDetail); // hapus non-breaking space
+                                        $shortDetail = Str::limit(trim($cleanDetail), 150);
                                     @endphp
 
                                     <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary);">
-                                        {{ (explode(' ', $l->name)[0] === 'Sadrach') ? 'Ando' : explode(' ', $l->name)[0] }}
-                                    <p
-                                        style="color: #555; margin-bottom: 1rem; height: 72px; overflow: hidden; font-size: 0.9rem;">
-                                        {{ $shortDetail }}
-                                    </p>
-                                    <div class="lawyer-social"
-                                        style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
-                                        @if ($l->profile->instagram)
-                                            <a href="{{ $l->profile->instagram }}" target="_blank"
-                                                style="color: var(--primary); font-size: 1.1rem;"><i
-                                                    class="fab fa-instagram"></i></a>
-                                        @endif
-                                        @if ($l->profile->facebook)
-                                            <a href="{{ $l->profile->facebook }}" target="_blank"
-                                                style="color: var(--primary); font-size: 1.1rem;"><i
-                                                    class="fab fa-facebook"></i></a>
-                                        @endif
-                                        @if ($l->profile->email)
-                                            <a href="mailto:{{ $l->profile->email }}"
-                                                style="color: var(--primary); font-size: 1.1rem;"><i
-                                                    class="fas fa-envelope"></i></a>
-                                        @endif
-                                        @if ($l->profile->whatsapp)
-                                            @php
-                                                $wa = $l->profile->whatsapp ?? '08123456789';
-                                                $wa_number = preg_replace('/^0/', '62', $wa);
-                                            @endphp
+                                        {{ explode(' ', $l->name)[0] === 'Sadrach' ? 'Ando' : explode(' ', $l->name)[0] }}
+                                        <p
+                                            style="color: #555; margin-bottom: 1rem; height: 72px; overflow: hidden; font-size: 0.9rem;">
+                                            {{ $shortDetail }}
+                                        </p>
+                                        <div class="lawyer-social"
+                                            style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
+                                            @if ($l->profile->instagram)
+                                                <a href="{{ $l->profile->instagram }}" target="_blank"
+                                                    style="color: var(--primary); font-size: 1.1rem;"><i
+                                                        class="fab fa-instagram"></i></a>
+                                            @endif
+                                            @if ($l->profile->facebook)
+                                                <a href="{{ $l->profile->facebook }}" target="_blank"
+                                                    style="color: var(--primary); font-size: 1.1rem;"><i
+                                                        class="fab fa-facebook"></i></a>
+                                            @endif
+                                            @if ($l->profile->email)
+                                                <a href="mailto:{{ $l->profile->email }}"
+                                                    style="color: var(--primary); font-size: 1.1rem;"><i
+                                                        class="fas fa-envelope"></i></a>
+                                            @endif
+                                            @if ($l->profile->whatsapp)
+                                                @php
+                                                    $wa = $l->profile->whatsapp ?? '08123456789';
+                                                    $wa_number = preg_replace('/^0/', '62', $wa);
+                                                @endphp
 
-                                            <a href="https://wa.me/{{ $wa_number }}"
-                                                style="color: var(--primary); font-size: 1.1rem;" target="_blank">
-                                                <i class="fas fa-phone-alt"></i>
-                                            </a>
-                                        @endif
-                                    </div>
-                                    <a href="/profile/detail-lawyer?lawyer={{ $l->name }}" class="btn"
-                                        style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
-                                        Lihat Profil Lengkap
-                                    </a>
+                                                <a href="https://wa.me/{{ $wa_number }}"
+                                                    style="color: var(--primary); font-size: 1.1rem;" target="_blank">
+                                                    <i class="fas fa-phone-alt"></i>
+                                                </a>
+                                            @endif
+                                        </div>
+                                        <a href="/profile/detail-lawyer?lawyer={{ $l->name }}" class="btn"
+                                            style="display: inline-block; padding: 0.5rem 1.2rem; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">
+                                            Lihat Profil Lengkap
+                                        </a>
                                 </div>
                             </div>
                         </div>
@@ -785,18 +792,17 @@
                 @foreach ($aktifitas as $a)
                     <div class="activity-card">
                         <div class="activity-image">
-                            <img src="{{asset('storage') . '/' . $a->thumbnail}}"
-                                alt="{{$a->judul}}">
+                            <img src="{{ asset('storage') . '/' . $a->thumbnail }}" alt="{{ $a->judul }}">
                         </div>
                         <div class="activity-content">
                             <div class="activity-meta">
                                 <span class="activity-date">{{ $item->created_at->format('d M Y') }}</span>
-                                <span class="activity-category">{{$a->kategori}}</span>
+                                <span class="activity-category">{{ $a->kategori }}</span>
                             </div>
-                            <h3>{{$a->judul}}</h3>
+                            <h3>{{ $a->judul }}</h3>
                             <p>{!! Str::limit(strip_tags($a->deksripsi), 120) !!}</p>
-                            <a href="/aktifitas/detail?judul={{$a->judul}}" class="read-more">Lihat Selengkapnya <i
-                                    class="fas fa-arrow-right"></i></a>
+                            <a href="/aktifitas/detail?judul={{ $a->judul }}" class="read-more">Lihat
+                                Selengkapnya <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 @endforeach
@@ -835,7 +841,8 @@
                     style="background-color: var(--secondary); color: var(--primary); padding: 1rem 2rem; font-weight: 600; border-radius: 4px; text-decoration: none; transition: all 0.3s ease;">
                     <i class="fas fa-phone-alt" style="margin-right: 0.5rem;"></i> Hubungi Kami
                 </a> --}}
-                <a href="https://wa.me/{{ $web->whatsapp }}?text=text=Halo, saya ingin berkonsultasi mengenai layanan anda" target="_blank" class="btn"
+                <a href="https://wa.me/{{ $web->whatsapp }}?text=text=Halo, saya ingin berkonsultasi mengenai layanan anda"
+                    target="_blank" class="btn"
                     style="background-color: transparent; color: white; padding: 1rem 2rem; font-weight: 600; border-radius: 4px; text-decoration: none; border: 2px solid var(--secondary); transition: all 0.3s ease;">
                     <i class="fas fa-phone-alt" style="margin-right: 0.5rem;"></i> Hubungi Kami
                 </a>
@@ -872,11 +879,11 @@
                         @php
                             $mail = $web->email ?? 'lawyer@siagiansudibyoandcolawfirm.com';
                         @endphp
-                        <a href="mailto:{{$mail}}" target="_blank"
+                        <a href="mailto:{{ $mail }}" target="_blank"
                             style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                             <i class="fas fa-envelope"></i>
                         </a>
-                        <a href="{{$web->instagram}}" target="_blank"
+                        <a href="{{ $web->instagram }}" target="_blank"
                             style="text-decoration: none; color: white; background-color: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                             <i class="fab fa-instagram"></i>
                         </a>
@@ -956,7 +963,7 @@
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                     <i class="fas fa-chevron-right"
                                         style="color: var(--secondary); margin-right: 0.5rem; font-size: 0.8rem;"></i>
-                                    {{$l->judul}}
+                                    {{ $l->judul }}
                                 </a>
                             </li>
                         @endforeach
@@ -977,7 +984,7 @@
                             </div>
                             <div>
                                 <p style="margin: 0; color: rgba(255,255,255,0.8); line-height: 1.5;">
-                                    {{$web->alamat}}
+                                    {{ $web->alamat }}
                                 </p>
                             </div>
                         </li>
@@ -987,7 +994,7 @@
                             </div>
                             <div>
                                 <a href="https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan anda }}"
-                                target="_blank"
+                                    target="_blank"
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
                                     {{ $web->whatsapp ?? '081218473429' }}
                                 </a>
@@ -1002,7 +1009,7 @@
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
                                     lawyer@siagiansudibyoandcolawfirm.com
                                 </a>
-                                
+
                             </div>
                         </li>
                         <li style="margin-bottom: 1rem; display: flex; align-items: center;">
@@ -1013,7 +1020,7 @@
                                 <a href="mailto:admin@siagiansudibyoandcolawfirm.com"
                                     style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease;">
                                     admin@siagiansudibyoandcolawfirm.com
-                                </a>   
+                                </a>
                             </div>
                         </li>
                         <li style="display: flex; align-items: center;">
@@ -1048,7 +1055,8 @@
         </div> --}}
     </footer>
 
-    <div id="floating-button" onclick="window.open('https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan anda', '_blank')">
+    <div id="floating-button"
+        onclick="window.open('https://wa.me/{{ $web->whatsapp ?? '081218473429' }}?text=Halo, saya ingin berkonsultasi mengenai layanan anda', '_blank')">
         <button id="close-btn">×</button>
         <img src="{{ asset('landing_assets/images/others/karakter.png') }}" alt="Floating" />
     </div>
