@@ -669,7 +669,7 @@
                                 style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;">
                                 <div class="lawyer-image" style="height: 250px; overflow: hidden;">
                                     <img src="{{ $l->profile->gambar ? asset('storage') . '/' . $l->profile->gambar : asset('own_assets/images/user.png') }}"
-                                        alt="{{ $l->name }}"
+                                        alt="{{ (explode(' ', $l->name)[0] === 'Sadrach') ? 'Ando' : explode(' ', $l->name)[0] }}"
                                         style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
 
                                 </div>
@@ -680,7 +680,7 @@
                                     @endphp
 
                                     <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary);">
-                                        {{ $l->name }}</h3>
+                                        {{ (explode(' ', $l->name)[0] === 'Sadrach') ? 'Ando' : explode(' ', $l->name)[0] }}
                                     <p
                                         style="color: #555; margin-bottom: 1rem; height: 72px; overflow: hidden; font-size: 0.9rem;">
                                         {{ $shortDetail }}

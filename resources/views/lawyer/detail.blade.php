@@ -1198,7 +1198,7 @@
                     <span style="color: var(--secondary); font-weight: 600; letter-spacing: 1px;">TENTANG LAWYERS
                         KAMI</span>
                     <h2 style="font-size: 2.2rem; margin: 0.5rem 0 1.5rem; color: var(--primary); line-height: 1.3;">
-                        {{$profile->name}}</h2>
+                        {{ (explode(' ', $profile->name)[0] === 'Sadrach') ? 'Ando' : explode(' ', $profile->name)[0] }}</h2>
                     <div style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #555; max-width: 800px; margin: 0 auto;">
                         {!!$profile->profile->detail!!}</h2>
                     </div>
