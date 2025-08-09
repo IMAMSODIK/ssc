@@ -681,8 +681,13 @@
                                 </div>
                                 <div class="lawyer-info" style="padding: 1.2rem; text-align: center;">
                                     @php
-                                        $cleanDetail = strip_tags($l->profile->detail); // hapus tag HTML
-                                        $cleanDetail = str_replace('&nbsp;', ' ', $cleanDetail); // hapus non-breaking space
+                                        $cleanDetail = strip_tags($l->profile->detail);
+                                        $cleanDetail = html_entity_decode(
+                                            $cleanDetail,
+                                            ENT_QUOTES | ENT_HTML5,
+                                            'UTF-8',
+                                        ); // decode entities
+                                        $cleanDetail = str_replace('&', ' ', $cleanDetail); // kalau mau & hilang
                                         $shortDetail = Str::limit(trim($cleanDetail), 150);
                                     @endphp
 
